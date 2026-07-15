@@ -1,0 +1,92 @@
+import type { Experience, Project, SkillGroup } from '@/types/portfolio'
+
+export const navigation = [
+  { label: 'About', target: '#about' },
+  { label: 'Works', target: '#works' },
+  { label: 'Experience', target: '#experience' },
+  { label: 'Contact', target: '#contact' },
+]
+
+export const skills: SkillGroup[] = [
+  {
+    id: 'frontend',
+    label: 'Frontend',
+    description: '意圖與介面之間，清楚而可靠的轉譯。',
+    icon: 'solar:code-square-linear',
+    skills: ['Vue', 'JavaScript', 'HTML', 'CSS'],
+  },
+  {
+    id: 'design',
+    label: 'Design',
+    description: '為閱讀與使用留出剛好的餘白。',
+    icon: 'solar:pen-new-square-linear',
+    skills: ['Figma', 'UI Design', 'UX Design'],
+  },
+  {
+    id: 'tools',
+    label: 'Tools',
+    description: '讓想法從草圖順利抵達上線。',
+    icon: 'solar:widget-5-linear',
+    skills: ['Git', 'WordPress', 'Vite'],
+  },
+]
+
+export const projects: Project[] = [
+  {
+    id: 'mori-journal',
+    number: '01',
+    title: 'Mori Journal',
+    category: 'Editorial website · 2024',
+    description: '把慢生活寫成可以閱讀的日常，一個以文字與影像為中心的生活誌網站。',
+    image: 'https://images.unsplash.com/photo-1497366811353-6870744d04b2?auto=format&fit=crop&w=1800&q=90',
+    imageAlt: '柔和光線下的極簡室內空間',
+    technologies: ['Vue 3', 'GSAP', 'Contentful'],
+    demoUrl: 'https://example.com',
+    githubUrl: 'https://github.com',
+  },
+  {
+    id: 'nami-stay',
+    number: '02',
+    title: 'Nami Stay',
+    category: 'Booking experience · 2024',
+    description: '讓住宿預訂回到直覺與感受；從探索到確認，每一步都安靜而清晰。',
+    image: 'https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?auto=format&fit=crop&w=1800&q=90',
+    imageAlt: '簡約住宅客廳與大型窗景',
+    technologies: ['Vue 3', 'Pinia', 'Figma'],
+    demoUrl: 'https://example.com',
+    githubUrl: 'https://github.com',
+  },
+  {
+    id: 'kanso-shop',
+    number: '03',
+    title: 'Kanso Objects',
+    category: 'E-commerce · 2023',
+    description: '為日常器物設計一處安靜的展示空間，讓商品自己說話。',
+    image: 'https://images.unsplash.com/photo-1524758631624-e2822e304c36?auto=format&fit=crop&w=1800&q=90',
+    imageAlt: '明亮的設計工作室',
+    technologies: ['Vue 3', 'SCSS', 'Shopify'],
+    demoUrl: 'https://example.com',
+    githubUrl: 'https://github.com',
+  },
+]
+
+export const experiences: Experience[] = [
+  {
+    period: '2023 — Now',
+    role: 'Frontend Developer · UI Designer',
+    company: 'Independent / Taipei',
+    description: '與品牌及新創團隊合作，從使用者流程、介面原型到可維護的前端實作。',
+  },
+  {
+    period: '2021 — 2023',
+    role: 'UI / UX Designer',
+    company: 'Kumo Creative Studio',
+    description: '參與品牌網站與數位產品設計，建立元件系統並陪伴產品從概念走向成形。',
+  },
+  {
+    period: '2019 — 2021',
+    role: 'Web Designer',
+    company: 'Northland Digital',
+    description: '專注於內容型網站與電商體驗，以清晰資訊層級改善閱讀與轉換流程。',
+  },
+]
