@@ -1,4 +1,4 @@
-# Yuna Lin — Portfolio
+# Jessie Lin — Portfolio
 
 以 Vue 3、Vite、TypeScript、Pinia、SCSS、GSAP、Lenis 與 Iconify 製作的日系極簡個人作品集範本。
 
