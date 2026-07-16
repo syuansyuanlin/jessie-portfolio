@@ -58,10 +58,10 @@
 
 .about__title {
   margin: 0;
-  font-family: var(--font-serif);
+  font-family: var(--font-heading);
   font-size: clamp(2.5rem, 4.6vw, 5.2rem);
   font-weight: 400;
-  letter-spacing: -0.055em;
+  letter-spacing: var(--heading-letter-spacing);
   line-height: 1.05;
 
   em {
