@@ -247,8 +247,11 @@ function scrollToAbout() {
 }
 
 .hero__copy {
+  position: relative;
+  z-index: 2;
   align-self: center;
   padding-top: 4rem;
+  transform: translateX(clamp(3rem, 10vw, 8rem));
 
   .eyebrow {
     margin-bottom: 1.5rem;
@@ -256,14 +259,28 @@ function scrollToAbout() {
 }
 
 .display-title em {
-  color: var(--sand-deep);
+  color: #fffdfb;
   font-size: 0.773em;
   font-weight: inherit;
 }
 
-.hero__copy .display-title {
+.hero__copy .display-title,
+.hero__copy .display-title em {
   font-family: var(--font-heading);
+  color: #fffdfb;
+  -webkit-text-stroke: 1px rgba(74, 61, 63, 0.72);
+  paint-order: stroke fill;
+  text-shadow:
+    0 1px 0 rgba(255, 255, 255, 0.95),
+    0 2px 0 rgba(227, 166, 182, 0.75),
+    0 3px 0 rgba(227, 166, 182, 0.52),
+    0 5px 0 rgba(204, 134, 155, 0.24),
+    0 9px 14px rgba(152, 102, 117, 0.18);
+}
+
+.hero__copy .display-title {
   font-size: clamp(2.66rem, 5.65vw, 5.2rem);
+  letter-spacing: 0.03em;
 }
 
 .hero__intro {
@@ -395,6 +412,7 @@ function scrollToAbout() {
 
   .hero__copy {
     padding-top: 0;
+    transform: none;
   }
 
   .hero__intro {

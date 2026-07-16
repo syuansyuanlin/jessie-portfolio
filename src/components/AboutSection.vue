@@ -1,3 +1,7 @@
+<script setup lang="ts">
+import aboutPhoto from '@/assets/images/my-photo.jpg'
+</script>
+
 <template>
   <section id="about" class="about section-shell" aria-labelledby="about-title">
     <div class="about__label" data-reveal>
@@ -7,7 +11,7 @@
 
     <div class="about__main">
       <h2 id="about-title" class="about__title" data-reveal>
-        I believe a good digital<br />experience feels <em>effortless.</em>
+        I believe a good digit<span class="about__title-light">al</span><br />experience feels <em>effortless.</em>
       </h2>
 
       <div class="about__story" data-reveal>
@@ -17,13 +21,16 @@
         <p>
           透過自學與實務專案累積設計與開發能力，致力於將設計理念轉化為實際可使用的產品與系統。
         </p>
-        <a class="text-link" href="#contact">More about me <span>→</span></a>
+        <a class="about__more" href="#contact">
+          <span class="about__more-label">View More</span>
+          <span class="about__more-circle" aria-hidden="true">→</span>
+        </a>
       </div>
     </div>
 
     <figure class="about__image" data-reveal>
       <img
-        src="https://images.unsplash.com/photo-1494438639946-1ebd1d20bf85?auto=format&fit=crop&w=1500&q=90"
+        :src="aboutPhoto"
         alt="溫暖日光照進室內的生活場景"
       />
       <figcaption>Quiet details, considered carefully.</figcaption>
@@ -34,7 +41,7 @@
 <style scoped lang="scss">
 .about {
   display: grid;
-  grid-template-columns: minmax(8rem, 0.45fr) minmax(0, 1.5fr);
+  grid-template-columns: minmax(7rem, 0.35fr) minmax(0, 1.1fr) minmax(15rem, 0.72fr);
   column-gap: clamp(2rem, 8vw, 10rem);
   padding-top: clamp(8rem, 16vw, 15rem);
   padding-bottom: clamp(8rem, 15vw, 14rem);
@@ -51,15 +58,20 @@
 }
 
 .about__main {
-  display: grid;
-  grid-template-columns: minmax(0, 1.1fr) minmax(15rem, 0.72fr);
-  gap: clamp(2.5rem, 8vw, 8rem);
+  grid-column: 2;
+  grid-row: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
 }
 
 .about__title {
+  position: relative;
+  z-index: 1;
+  transform: translateX(clamp(1.25rem, 2.5vw, 2rem));
   margin: 0;
   font-family: var(--font-heading);
-  font-size: clamp(2.5rem, 4.6vw, 5.2rem);
+  font-size: clamp(2.25rem, 3.53vw, 4.3rem);
   font-weight: 400;
   letter-spacing: var(--heading-letter-spacing);
   line-height: 1.05;
@@ -70,8 +82,14 @@
   }
 }
 
+.about__title-light {
+  color: #fff;
+}
+
 .about__story {
-  padding-top: clamp(1.3rem, 4vw, 5rem);
+  width: min(100%, 29rem);
+  margin: clamp(1.75rem, 3vw, 3rem) 0 0;
+  padding-top: 0;
   color: var(--ink-soft);
   font-size: 0.86rem;
   line-height: 2.05;
@@ -80,22 +98,59 @@
     margin: 0 0 1.25rem;
   }
 
-  .text-link {
-    margin-top: 1.2rem;
-    color: var(--ink);
-  }
+}
+
+.about__more {
+  display: inline-flex;
+  align-items: center;
+  gap: 1.25rem;
+  margin-top: 1.8rem;
+  color: var(--ink);
+}
+
+.about__more-label {
+  font-family: var(--font-heading);
+  font-size: 18px;
+  letter-spacing: -0.025em;
+}
+
+.about__more-circle {
+  display: grid;
+  width: clamp(4.5rem, 6vw, 5.75rem);
+  height: clamp(4.5rem, 6vw, 5.75rem);
+  place-items: center;
+  border: 1px solid currentcolor;
+  border-radius: 50%;
+  font-size: 1.45rem;
+  line-height: 1;
+  transition: transform 500ms cubic-bezier(0.22, 1, 0.36, 1), background-color 350ms ease, color 350ms ease;
+}
+
+.about__more:hover .about__more-circle {
+  background: var(--ink);
+  color: var(--paper);
+  transform: scale(1.16);
+}
+
+.about__more:focus-visible {
+  outline: 2px solid var(--sand-deep);
+  outline-offset: 0.4rem;
 }
 
 .about__image {
-  grid-column: 2;
-  width: min(76%, 48rem);
-  margin: clamp(4rem, 9vw, 9rem) 0 0 auto;
+  grid-column: 3;
+  grid-row: 1;
+  align-self: start;
+  position: relative;
+  z-index: 0;
+  width: min(85%, 18rem);
+  margin: 0;
+  justify-self: start;
+  transform: translateX(clamp(-13rem, -11vw, -7rem));
 
   img {
     width: 100%;
-    aspect-ratio: 1.65;
-    object-fit: cover;
-    filter: saturate(0.66) sepia(0.11);
+    height: auto;
   }
 
   figcaption {
@@ -117,21 +172,32 @@
   .about__main,
   .about__image {
     grid-column: 1;
+    grid-row: auto;
   }
 
+  .about__image { order: 2; }
+
   .about__image {
-    margin-top: 5rem;
+    width: min(76%, 48rem);
+    margin: 0 0 0 auto;
+    justify-self: auto;
+    transform: none;
+  }
+
+  .about__title {
+    transform: none;
+  }
+
+  .about__story {
+    margin: 2rem 0 0 auto;
   }
 }
 
 @media (max-width: 620px) {
-  .about__main {
-    grid-template-columns: 1fr;
-    gap: 1.6rem;
-  }
-
   .about__story {
     max-width: 30rem;
+    width: 100%;
+    margin-top: 0;
     padding-top: 0;
     font-size: 0.8rem;
   }

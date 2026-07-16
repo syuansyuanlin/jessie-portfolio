@@ -10,7 +10,7 @@ export const navigation = [
 export const skills: SkillGroup[] = [
   {
     id: 'frontend',
-    label: 'Frontend',
+    label: 'Web Development',
     description: '意圖與介面之間，清楚而可靠的轉譯。',
     icon: 'solar:code-square-linear',
     skills: ['Vue', 'JavaScript', 'HTML', 'CSS'],
@@ -20,7 +20,7 @@ export const skills: SkillGroup[] = [
     label: 'Design',
     description: '為閱讀與使用留出剛好的餘白。',
     icon: 'solar:pen-new-square-linear',
-    skills: ['Figma', 'UI Design', 'UX Design'],
+    skills: ['Figma', 'Illustrator', 'Photoshop'],
   },
   {
     id: 'tools',
@@ -72,21 +72,15 @@ export const projects: Project[] = [
 
 export const experiences: Experience[] = [
   {
-    period: '2023 — Now',
-    role: 'Frontend Developer · UI Designer',
-    company: 'Independent / Taipei',
-    description: '與品牌及新創團隊合作，從使用者流程、介面原型到可維護的前端實作。',
+    period: '2025 — Now',
+    role: 'Web Developer',
+    company: '旭海國際科技股份有限公司',
+    description: '負責旅宿業 WordPress 網站建置與維護，依照客戶需求調整版型、功能及響應式介面，並進行外掛整合、效能優化、基礎 SEO 與異常排除。',
   },
   {
-    period: '2021 — 2023',
-    role: 'UI / UX Designer',
-    company: 'Kumo Creative Studio',
-    description: '參與品牌網站與數位產品設計，建立元件系統並陪伴產品從概念走向成形。',
-  },
-  {
-    period: '2019 — 2021',
-    role: 'Web Designer',
-    company: 'Northland Digital',
-    description: '專注於內容型網站與電商體驗，以清晰資訊層級改善閱讀與轉換流程。',
+    period: '2023 — 2025',
+    role: 'Front-End Developer',
+    company: '云碩科技股份有限公司',
+    description: '使用Microsoft Power Platform開發企業內部系統，並參與 React 前端專案，負責介面設計、功能開發及客戶需求溝通。',
   },
 ]

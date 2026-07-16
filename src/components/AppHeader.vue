@@ -78,12 +78,12 @@ function goTo(target: string) {
 .site-header {
   position: fixed;
   z-index: 20;
-  top: 0;
-  left: 0;
+  top: 0.65rem;
+  left: 0.65rem;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  width: 100%;
+  width: calc(100% - 1.3rem);
   height: 5.4rem;
   padding: 0 var(--gutter);
   mix-blend-mode: multiply;
@@ -221,6 +221,9 @@ function goTo(target: string) {
 @media (max-width: 720px) {
   .site-header {
     height: 4.7rem;
+    top: 0.4rem;
+    left: 0.4rem;
+    width: calc(100% - 0.8rem);
     mix-blend-mode: normal;
   }
 
