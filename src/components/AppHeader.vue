@@ -1,25 +1,35 @@
 <script setup lang="ts">
-import { Icon } from '@iconify/vue'
-import { navigation } from '@/data/portfolio'
-import { useUiStore } from '@/stores/ui'
+import { Icon } from "@iconify/vue";
+import { navigation } from "@/data/portfolio";
+import { useUiStore } from "@/stores/ui";
 
-const ui = useUiStore()
+const ui = useUiStore();
 
 function goTo(target: string) {
-  ui.closeMenu()
-  document.querySelector(target)?.scrollIntoView({ behavior: 'smooth' })
+  ui.closeMenu();
+  document.querySelector(target)?.scrollIntoView({ behavior: "smooth" });
 }
 </script>
 
 <template>
   <header class="site-header" :class="{ 'menu-open': ui.isMenuOpen }">
-    <a class="brand" href="#top" aria-label="回到首頁" @click.prevent="goTo('#top')">
-      <span class="brand__mark">YL</span>
-      <span class="brand__name">Yuna Lin</span>
+    <a
+      class="brand"
+      href="#top"
+      aria-label="回到首頁"
+      @click.prevent="goTo('#top')"
+    >
+      <span class="brand__mark">JL</span>
+      <span class="brand__name">Jessie Lin</span>
     </a>
 
     <nav class="desktop-nav" aria-label="主要導覽">
-      <button v-for="item in navigation" :key="item.target" type="button" @click="goTo(item.target)">
+      <button
+        v-for="item in navigation"
+        :key="item.target"
+        type="button"
+        @click="goTo(item.target)"
+      >
         {{ item.label }}
       </button>
     </nav>
@@ -31,17 +41,34 @@ function goTo(target: string) {
       aria-controls="mobile-navigation"
       @click="ui.toggleMenu"
     >
-      <span>{{ ui.isMenuOpen ? 'Close' : 'Menu' }}</span>
-      <Icon :icon="ui.isMenuOpen ? 'solar:close-circle-linear' : 'solar:hamburger-menu-linear'" />
+      <span>{{ ui.isMenuOpen ? "Close" : "Menu" }}</span>
+      <Icon
+        :icon="
+          ui.isMenuOpen
+            ? 'solar:close-circle-linear'
+            : 'solar:hamburger-menu-linear'
+        "
+      />
     </button>
 
     <Transition name="menu-fade">
-      <nav v-if="ui.isMenuOpen" id="mobile-navigation" class="mobile-nav" aria-label="行動版導覽">
+      <nav
+        v-if="ui.isMenuOpen"
+        id="mobile-navigation"
+        class="mobile-nav"
+        aria-label="行動版導覽"
+      >
         <p class="eyebrow">Navigation</p>
-        <button v-for="(item, index) in navigation" :key="item.target" type="button" @click="goTo(item.target)">
-          <span>0{{ index + 1 }}</span>{{ item.label }}
+        <button
+          v-for="(item, index) in navigation"
+          :key="item.target"
+          type="button"
+          @click="goTo(item.target)"
+        >
+          <span>0{{ index + 1 }}</span
+          >{{ item.label }}
         </button>
-        <a href="mailto:hello@yunalin.design">hello@yunalin.design</a>
+        <a href="mailto:dasty854291@gmail.com">dasty854291@gmail.com</a>
       </nav>
     </Transition>
   </header>
@@ -107,7 +134,7 @@ function goTo(target: string) {
       left: 0;
       height: 1px;
       background: currentcolor;
-      content: '';
+      content: "";
       transform: scaleX(0);
       transform-origin: right;
       transition: transform 350ms ease;

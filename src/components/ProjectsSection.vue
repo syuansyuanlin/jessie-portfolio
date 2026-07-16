@@ -18,8 +18,8 @@ import ProjectCard from '@/components/ProjectCard.vue'
         v-for="(project, index) in projects"
         :key="project.id"
         :project="project"
+        :reversed="index % 2 === 1"
         class="projects__item"
-        :class="`projects__item--${index + 1}`"
         data-reveal
       />
     </div>
@@ -54,22 +54,8 @@ import ProjectCard from '@/components/ProjectCard.vue'
 .projects__list {
   display: flex;
   flex-direction: column;
-  gap: clamp(5.5rem, 12vw, 11rem);
-  margin-top: clamp(5rem, 12vw, 11rem);
-}
-
-.projects__item--1 {
-  margin-left: clamp(0rem, 9vw, 10rem);
-}
-
-.projects__item--2 {
-  margin-left: auto;
-  margin-right: clamp(0rem, 5vw, 6rem);
-}
-
-.projects__item--3 {
-  width: min(80%, 52rem);
-  margin-left: clamp(0rem, 3vw, 4rem);
+  gap: clamp(7rem, 14vw, 13rem);
+  margin-top: clamp(5.5rem, 12vw, 11rem);
 }
 
 @media (max-width: 850px) {
@@ -78,12 +64,5 @@ import ProjectCard from '@/components/ProjectCard.vue'
     gap: 1.5rem;
   }
 
-  .projects__item--1,
-  .projects__item--2,
-  .projects__item--3 {
-    width: 100%;
-    margin-right: 0;
-    margin-left: 0;
-  }
 }
 </style>

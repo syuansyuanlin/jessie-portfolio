@@ -1,11 +1,26 @@
 <script setup lang="ts">
-import { Icon } from '@iconify/vue'
+import { Icon } from "@iconify/vue";
 
 const contacts = [
-  { label: 'Email', value: 'hello@yunalin.design', href: 'mailto:hello@yunalin.design', icon: 'solar:letter-linear' },
-  { label: 'GitHub', value: '@yunalin', href: 'https://github.com', icon: 'mdi:github' },
-  { label: 'LinkedIn', value: 'Yuna Lin', href: 'https://linkedin.com', icon: 'mdi:linkedin' },
-]
+  {
+    label: "Email",
+    value: "dasty854291@gmail.com",
+    href: "mailto:dasty854291@gmail.com",
+    icon: "solar:letter-linear",
+  },
+  {
+    label: "GitHub",
+    value: "@jessielin",
+    href: "https://github.com",
+    icon: "mdi:github",
+  },
+  {
+    label: "LinkedIn",
+    value: "Jessie Lin",
+    href: "https://linkedin.com",
+    icon: "mdi:linkedin",
+  },
+];
 </script>
 
 <template>
@@ -16,11 +31,17 @@ const contacts = [
         Let’s make<br />something <em>meaningful.</em>
       </h2>
       <p class="contact__intro" data-reveal>
-        有一個正在醞釀中的想法嗎？<br />期待聽見你的故事。
+        歡迎隨時透過以下電子郵件地址與我聯絡
       </p>
 
       <div class="contact__links" data-reveal>
-        <a v-for="contact in contacts" :key="contact.label" :href="contact.href" target="_blank" rel="noreferrer">
+        <a
+          v-for="contact in contacts"
+          :key="contact.label"
+          :href="contact.href"
+          target="_blank"
+          rel="noreferrer"
+        >
           <span class="contact__icon"><Icon :icon="contact.icon" /></span>
           <span>
             <small>{{ contact.label }}</small>
@@ -46,10 +67,10 @@ const contacts = [
 .contact__title {
   max-width: 60rem;
   margin: clamp(2rem, 5vw, 4.5rem) 0 0;
-  font-family: var(--font-serif);
-  font-size: clamp(4rem, 9.5vw, 10rem);
+  font-family: var(--font-heading);
+  font-size: clamp(4rem, 6.667vw, 8rem);
   font-weight: 400;
-  letter-spacing: -0.065em;
+  letter-spacing: var(--heading-letter-spacing);
   line-height: 0.88;
 
   em {
@@ -99,10 +120,10 @@ const contacts = [
   }
 
   strong {
-    font-family: var(--font-serif);
+    font-family: var(--font-heading);
     font-size: 1.1rem;
     font-weight: 400;
-    letter-spacing: -0.02em;
+    letter-spacing: 0.035em;
   }
 }
 

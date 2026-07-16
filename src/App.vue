@@ -2,6 +2,7 @@
 import { onBeforeUnmount, onMounted } from 'vue'
 import Lenis from 'lenis'
 import AppHeader from '@/components/AppHeader.vue'
+import CustomCursor from '@/components/CustomCursor.vue'
 
 let frameId = 0
 let lenis: Lenis | undefined
@@ -34,4 +35,5 @@ onBeforeUnmount(() => {
 <template>
   <AppHeader />
   <RouterView />
+  <CustomCursor />
 </template>

@@ -1,21 +1,45 @@
 <script setup lang="ts">
-import { Icon } from '@iconify/vue'
-import profilePhoto from '@/assets/images/my-photo.jpg'
+import { Icon } from "@iconify/vue";
+import profilePhoto from "@/assets/images/GuNEphFaYAA1JvO.jpg";
 
 function scrollToAbout() {
-  document.querySelector('#about')?.scrollIntoView({ behavior: 'smooth' })
+  document.querySelector("#about")?.scrollIntoView({ behavior: "smooth" });
 }
 </script>
 
 <template>
   <section id="top" class="hero" aria-labelledby="hero-title">
+    <svg class="hero__clip-defs" aria-hidden="true" focusable="false">
+      <defs>
+        <clipPath id="hero-portrait-scallop" clipPathUnits="objectBoundingBox">
+          <circle cx="0.5" cy="0.5" r="0.43" />
+          <circle cx="0.5" cy="0.095" r="0.085" />
+          <circle cx="0.63" cy="0.116" r="0.085" />
+          <circle cx="0.738" cy="0.172" r="0.085" />
+          <circle cx="0.827" cy="0.262" r="0.085" />
+          <circle cx="0.884" cy="0.37" r="0.085" />
+          <circle cx="0.905" cy="0.5" r="0.085" />
+          <circle cx="0.884" cy="0.63" r="0.085" />
+          <circle cx="0.827" cy="0.738" r="0.085" />
+          <circle cx="0.738" cy="0.828" r="0.085" />
+          <circle cx="0.63" cy="0.884" r="0.085" />
+          <circle cx="0.5" cy="0.905" r="0.085" />
+          <circle cx="0.37" cy="0.884" r="0.085" />
+          <circle cx="0.262" cy="0.828" r="0.085" />
+          <circle cx="0.173" cy="0.738" r="0.085" />
+          <circle cx="0.116" cy="0.63" r="0.085" />
+          <circle cx="0.095" cy="0.5" r="0.085" />
+          <circle cx="0.116" cy="0.37" r="0.085" />
+          <circle cx="0.173" cy="0.262" r="0.085" />
+          <circle cx="0.262" cy="0.172" r="0.085" />
+          <circle cx="0.37" cy="0.116" r="0.085" />
+        </clipPath>
+      </defs>
+    </svg>
+
     <div class="hero__bubbles" aria-hidden="true">
-      <span class="hero__bubble hero__bubble--1" />
-      <span class="hero__bubble hero__bubble--2" />
-      <span class="hero__bubble hero__bubble--3" />
-      <span class="hero__bubble hero__bubble--4" />
-      <span class="hero__bubble hero__bubble--5" />
-      <span class="hero__bubble hero__bubble--6" />
+      <span class="hero__bubble hero__bubble--pink" />
+      <span class="hero__bubble hero__bubble--blue" />
     </div>
 
     <div class="hero__topline" data-reveal>
@@ -26,15 +50,18 @@ function scrollToAbout() {
     <div class="hero__composition section-shell">
       <div class="hero__copy" data-reveal data-reveal-delay="0.12">
         <p class="eyebrow">Frontend Developer · UI Designer</p>
-        <h1 id="hero-title" class="display-title">Jessie's Portfolio<br /><em>made with care.</em></h1>
-        <p class="hero__intro">熱愛從創意發想到畫面實現的過程，希望透過每一次的作品帶給使用者更美好的體驗。</p>
+        <h1 id="hero-title" class="display-title">
+          Jessie's Portfolio<br /><em>made with care.</em>
+        </h1>
+        <p class="hero__intro">
+          熱愛從創意發想到畫面實現的過程，希望透過每一次的作品帶給使用者更美好的體驗。
+        </p>
       </div>
 
       <figure class="hero__portrait" data-reveal data-reveal-delay="0.25">
-        <img
-          :src="profilePhoto"
-          alt="Jessie Lin 的個人形象照示意圖"
-        />
+        <div class="hero__portrait-orb">
+          <img :src="profilePhoto" alt="Jessie Lin 的個人形象照示意圖" />
+        </div>
         <figcaption>Jessie Lin / 01</figcaption>
       </figure>
 
@@ -44,7 +71,12 @@ function scrollToAbout() {
       </div>
     </div>
 
-    <button class="scroll-cue" type="button" aria-label="捲動至關於我" @click="scrollToAbout">
+    <button
+      class="scroll-cue"
+      type="button"
+      aria-label="捲動至關於我"
+      @click="scrollToAbout"
+    >
       <span>Scroll to explore</span>
       <Icon icon="solar:arrow-down-linear" />
     </button>
@@ -60,8 +92,15 @@ function scrollToAbout() {
   background: var(--canvas);
 }
 
+.hero__clip-defs {
+  position: absolute;
+  width: 0;
+  height: 0;
+}
+
 .hero__bubbles {
   position: absolute;
+  z-index: 0;
   inset: 0;
   overflow: hidden;
   pointer-events: none;
@@ -69,39 +108,111 @@ function scrollToAbout() {
 
 .hero__bubble {
   position: absolute;
-  display: block;
-  width: var(--bubble-size);
-  height: var(--bubble-size);
-  border: 1px solid rgba(174, 205, 241, 0.42);
-  border-radius: 50%;
-  background:
-    radial-gradient(circle at 30% 24%, rgba(255, 255, 255, 0.82) 0 6%, transparent 23%),
-    linear-gradient(135deg, rgba(255, 194, 218, 0.38), rgba(184, 220, 255, 0.36) 58%, rgba(229, 207, 255, 0.28));
-  box-shadow: inset 0 0 1.2rem rgba(255, 255, 255, 0.65), 0 0 2rem rgba(174, 205, 241, 0.16);
-  opacity: 0.58;
-  animation: bubble-float var(--bubble-duration) ease-in-out var(--bubble-delay) infinite alternate;
+  top: 125%;
+  left: 0.625rem;
+  width: 30rem;
+  height: 30rem;
+  transform: translateY(-50%);
+  background: linear-gradient(
+    135deg,
+    rgba(190, 226, 240, 0.38),
+    rgba(254, 223, 225, 0.24) 72%,
+    rgba(255, 247, 243, 0.7)
+  );
+  opacity: 0.7;
+  box-shadow:
+    0 0 0.95rem rgba(255, 255, 255, 0.6),
+    inset 0 0 1.25rem rgba(255, 255, 255, 0.8);
+  transform-origin: center;
+  animation:
+    hero-bubble-morph 7s ease-in-out infinite alternate,
+    hero-bubble-float 8s ease-in-out infinite;
 }
 
-.hero__bubble--1 { --bubble-size: 8rem; --bubble-duration: 12s; --bubble-delay: -3s; top: 17%; left: 4%; }
-.hero__bubble--2 { --bubble-size: 12rem; --bubble-duration: 16s; --bubble-delay: -6s; top: 62%; left: 40%; }
-.hero__bubble--3 { --bubble-size: 5rem; --bubble-duration: 10s; --bubble-delay: -2s; top: 66%; right: 22%; }
-.hero__bubble--4 { --bubble-size: 15rem; --bubble-duration: 18s; --bubble-delay: -5s; top: 8%; right: 5%; }
-.hero__bubble--5 { --bubble-size: 4rem; --bubble-duration: 11s; --bubble-delay: -1s; bottom: 13%; left: 23%; }
-.hero__bubble--6 { --bubble-size: 7rem; --bubble-duration: 15s; --bubble-delay: -7s; bottom: 4%; right: 3%; }
-
-@keyframes bubble-float {
-  from { transform: translate3d(0, 0, 0) scale(0.95); }
-  to { transform: translate3d(0.8rem, -1.4rem, 0) scale(1.06); }
+.hero__bubble--pink {
+  z-index: 1;
+  top: 34%;
+  left: 40%;
+  width: 31.25rem;
+  height: 31.25rem;
+  background: linear-gradient(
+    135deg,
+    rgba(190, 226, 240, 0.3),
+    rgba(254, 223, 225, 0.42) 70%,
+    rgba(255, 247, 243, 0.72)
+  );
+  animation:
+    hero-bubble-morph 9s ease-in-out infinite alternate,
+    hero-bubble-float 10s ease-in-out infinite reverse;
 }
 
-.hero::before {
-  position: absolute;
-  top: 22%;
-  right: 0;
-  width: min(44vw, 45rem);
-  height: 57%;
-  background: var(--canvas-deep);
-  content: '';
+.hero__bubble--blue {
+  top: 62%;
+  left: clamp(1.5rem, 5vw, 5rem);
+  width: 25rem;
+  height: 25rem;
+}
+
+@keyframes hero-bubble-morph {
+  0% {
+    border-radius: 60% 70% 57% 68% / 50% 65% 62% 68%;
+    box-shadow:
+      0 0 0.95rem rgba(255, 255, 255, 0.6),
+      inset 0 0 1.25rem rgba(255, 255, 255, 0.8);
+  }
+  20% {
+    border-radius: 50% 80% 67% 70% / 55% 58% 70% 56%;
+    box-shadow:
+      0 0 1.25rem rgba(255, 255, 255, 0.7),
+      inset 0 0 1.55rem rgba(255, 255, 255, 0.85);
+  }
+  40% {
+    border-radius: 72% 58% 73% 62% / 70% 68% 50% 60%;
+    box-shadow:
+      0 0 1.125rem rgba(255, 255, 255, 0.65),
+      inset 0 0 1.375rem rgba(255, 255, 255, 0.75);
+  }
+  60% {
+    border-radius: 48% 82% 65% 75% / 75% 55% 80% 54%;
+    box-shadow:
+      0 0 1.375rem rgba(255, 255, 255, 0.75),
+      inset 0 0 1.75rem rgba(255, 255, 255, 0.9);
+  }
+  80% {
+    border-radius: 72% 59% 80% 54% / 48% 77% 52%;
+    box-shadow:
+      0 0 1.0625rem rgba(255, 255, 255, 0.6),
+      inset 0 0 1.3125rem rgba(255, 255, 255, 0.7);
+  }
+  100% {
+    border-radius: 60% 70% 57% 68% / 50% 65% 62% 68%;
+    box-shadow:
+      0 0 0.95rem rgba(255, 255, 255, 0.6),
+      inset 0 0 1.25rem rgba(255, 255, 255, 0.8);
+  }
+}
+
+@keyframes hero-bubble-float {
+  0% {
+    transform: translateY(-50%) translate(0);
+    opacity: 0.7;
+  }
+  25% {
+    transform: translateY(-48%) translate(0.95rem);
+    opacity: 0.8;
+  }
+  50% {
+    transform: translateY(-52%) translate(0.3rem);
+    opacity: 0.75;
+  }
+  75% {
+    transform: translateY(-47%) translate(-0.625rem);
+    opacity: 0.85;
+  }
+  100% {
+    transform: translateY(-50%) translate(0);
+    opacity: 0.7;
+  }
 }
 
 .hero__topline {
@@ -123,8 +234,12 @@ function scrollToAbout() {
 
 .hero__composition {
   position: relative;
+  z-index: 1;
   display: grid;
-  grid-template-columns: minmax(0, 1.25fr) minmax(15rem, 0.78fr) minmax(8rem, 0.34fr);
+  grid-template-columns: minmax(0, 1.25fr) minmax(15rem, 0.78fr) minmax(
+      8rem,
+      0.34fr
+    );
   align-items: center;
   gap: clamp(2rem, 5vw, 6.5rem);
   padding-top: 9rem;
@@ -142,11 +257,12 @@ function scrollToAbout() {
 
 .display-title em {
   color: var(--sand-deep);
+  font-size: 0.773em;
   font-weight: inherit;
 }
 
 .hero__copy .display-title {
-  font-family: 'Cormorant Garamond', 'Noto Serif TC', serif;
+  font-family: var(--font-heading);
   font-size: clamp(2.66rem, 5.65vw, 5.2rem);
 }
 
@@ -161,37 +277,37 @@ function scrollToAbout() {
 
 .hero__portrait {
   position: relative;
+  z-index: 1;
   align-self: end;
-  width: min(100%, 27rem);
+  width: clamp(17rem, 34vw, 31rem);
+  max-width: none;
   margin: 0 0 1.5rem;
   justify-self: center;
+}
 
-  &::before {
-    position: absolute;
-    z-index: -1;
-    top: -1.1rem;
-    right: -1.1rem;
-    width: 100%;
-    height: 100%;
-    border: 1px solid rgba(184, 158, 136, 0.6);
-    content: '';
-  }
+.hero__portrait-orb {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 1;
+  filter: drop-shadow(0 1.3rem 1.8rem rgba(114, 148, 162, 0.12));
 
   img {
     width: 100%;
-    aspect-ratio: 0.78;
+    height: 100%;
+    display: block;
+    clip-path: url(#hero-portrait-scallop);
     object-fit: cover;
-    object-position: center;
+    object-position: center 32%;
   }
+}
 
-  figcaption {
-    margin-top: 0.7rem;
-    color: var(--ink-faint);
-    font-size: 0.64rem;
-    letter-spacing: 0.14em;
-    text-align: right;
-    text-transform: uppercase;
-  }
+.hero__portrait figcaption {
+  margin-top: 0.7rem;
+  color: var(--ink-faint);
+  font-size: 0.64rem;
+  letter-spacing: 0.14em;
+  text-align: right;
+  text-transform: uppercase;
 }
 
 .hero__note {
@@ -217,6 +333,7 @@ function scrollToAbout() {
 
 .scroll-cue {
   position: absolute;
+  z-index: 1;
   bottom: 2.4rem;
   left: var(--gutter);
   display: inline-flex;
@@ -239,7 +356,9 @@ function scrollToAbout() {
 }
 
 @keyframes cue {
-  50% { transform: translateY(0.35rem); }
+  50% {
+    transform: translateY(0.35rem);
+  }
 }
 
 @media (max-width: 900px) {
@@ -256,13 +375,6 @@ function scrollToAbout() {
 @media (max-width: 620px) {
   .hero {
     min-height: 48rem;
-  }
-
-  .hero::before {
-    top: auto;
-    bottom: 8%;
-    width: 75%;
-    height: 42%;
   }
 
   .hero__topline {

@@ -45,10 +45,10 @@ import { skills } from '@/data/portfolio'
 .skills__heading {
   h2 {
     margin: 1.25rem 0 0;
-    font-family: var(--font-serif);
+    font-family: var(--font-heading);
     font-size: clamp(2.4rem, 4vw, 4.8rem);
     font-weight: 400;
-    letter-spacing: -0.055em;
+    letter-spacing: var(--heading-letter-spacing);
     line-height: 1.03;
   }
 
@@ -87,10 +87,10 @@ import { skills } from '@/data/portfolio'
 
 .skill-group h3 {
   margin: 0;
-  font-family: var(--font-serif);
+  font-family: var(--font-heading);
   font-size: 1.65rem;
   font-weight: 400;
-  letter-spacing: -0.035em;
+  letter-spacing: var(--heading-letter-spacing);
 }
 
 .skill-group p {

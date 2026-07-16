@@ -4,18 +4,15 @@ import type { Project } from '@/types/portfolio'
 
 defineProps<{
   project: Project
+  reversed?: boolean
 }>()
 </script>
 
 <template>
-  <article class="project-card">
+  <article class="project-card" :class="{ 'project-card--reversed': reversed }">
     <div class="project-card__image-wrap">
       <img class="project-card__image" :src="project.image" :alt="project.imageAlt" loading="lazy" />
       <p class="project-card__number">{{ project.number }}</p>
-      <div class="project-card__links">
-        <a :href="project.demoUrl" target="_blank" rel="noreferrer">Demo <Icon icon="solar:arrow-up-right-linear" /></a>
-        <a :href="project.githubUrl" target="_blank" rel="noreferrer">GitHub <Icon icon="solar:arrow-up-right-linear" /></a>
-      </div>
     </div>
 
     <div class="project-card__detail">
@@ -27,108 +24,105 @@ defineProps<{
       <ul aria-label="使用技術">
         <li v-for="technology in project.technologies" :key="technology">{{ technology }}</li>
       </ul>
+      <div class="project-card__actions">
+        <a :href="project.demoUrl" target="_blank" rel="noreferrer">
+          View project <Icon icon="solar:arrow-up-right-linear" />
+        </a>
+        <a :href="project.githubUrl" target="_blank" rel="noreferrer">
+          GitHub <Icon icon="solar:arrow-up-right-linear" />
+        </a>
+      </div>
     </div>
   </article>
 </template>
 
 <style scoped lang="scss">
 .project-card {
-  width: min(100%, 63rem);
+  display: grid;
+  grid-template-columns: minmax(0, 1.12fr) minmax(17rem, 0.72fr);
+  align-items: center;
+  gap: clamp(2.75rem, 8vw, 9rem);
+  width: 100%;
+}
+
+.project-card--reversed {
+  grid-template-columns: minmax(17rem, 0.72fr) minmax(0, 1.12fr);
+
+  .project-card__image-wrap {
+    grid-row: 1;
+    grid-column: 2;
+  }
+
+  .project-card__detail {
+    grid-row: 1;
+    grid-column: 1;
+  }
 }
 
 .project-card__image-wrap {
   position: relative;
   overflow: hidden;
   background: var(--canvas-deep);
+  box-shadow: 0 1.1rem 2.8rem rgba(34, 34, 34, 0.07);
 }
 
 .project-card__image {
   width: 100%;
-  aspect-ratio: 1.45;
+  aspect-ratio: 1.46;
   object-fit: cover;
-  filter: saturate(0.65) sepia(0.1);
+  filter: saturate(0.72) sepia(0.08);
   transition: transform 1.1s cubic-bezier(0.22, 1, 0.36, 1), filter 800ms ease;
 }
 
 .project-card__number {
   position: absolute;
-  top: 1.4rem;
-  left: 1.4rem;
+  top: 1.2rem;
+  left: 1.2rem;
   margin: 0;
-  color: var(--paper);
-  font-size: 0.68rem;
+  padding: 0.24rem 0.45rem;
+  background: rgba(255, 255, 255, 0.86);
+  color: var(--ink-soft);
+  font-size: 0.62rem;
   letter-spacing: 0.14em;
-  text-shadow: 0 1px 10px rgba(0, 0, 0, 0.12);
-}
-
-.project-card__links {
-  position: absolute;
-  right: 1.4rem;
-  bottom: 1.3rem;
-  display: flex;
-  gap: 0.65rem;
-  opacity: 0;
-  transform: translateY(0.6rem);
-  transition: opacity 400ms ease, transform 400ms ease;
-
-  a {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.3rem;
-    padding: 0.5rem 0.7rem;
-    background: rgba(255, 255, 255, 0.9);
-    color: var(--ink);
-    font-size: 0.66rem;
-    letter-spacing: 0.06em;
-    transition: background 300ms ease;
-
-    &:hover {
-      background: var(--paper);
-    }
-  }
-
-  svg {
-    width: 0.9rem;
-    height: 0.9rem;
-  }
 }
 
 .project-card__detail {
-  display: grid;
-  grid-template-columns: minmax(12rem, 0.8fr) minmax(12rem, 0.8fr) auto;
-  align-items: end;
-  gap: 1.25rem;
-  padding: 1.3rem 0 0;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
 }
 
 .project-card__detail > div > p,
 .project-card__description {
   margin: 0;
   color: var(--ink-faint);
-  font-size: 0.68rem;
-  letter-spacing: 0.04em;
+  font-size: 0.7rem;
+  letter-spacing: 0.08em;
 }
 
 .project-card h3 {
   margin: 0.28rem 0 0;
-  font-family: var(--font-serif);
-  font-size: 2rem;
+  font-family: var(--font-heading);
+  font-size: clamp(2rem, 3vw, 3.35rem);
   font-weight: 400;
-  letter-spacing: -0.045em;
-  line-height: 1;
+  letter-spacing: var(--heading-letter-spacing);
+  line-height: 1.05;
 }
 
 .project-card__description {
-  max-width: 17rem;
-  line-height: 1.75;
+  max-width: 25rem;
+  margin-top: 1.5rem;
+  color: var(--ink-soft);
+  font-size: 0.78rem;
+  letter-spacing: 0.04em;
+  line-height: 2;
 }
 
 .project-card ul {
   display: flex;
   flex-wrap: wrap;
-  justify-content: flex-end;
-  gap: 0.45rem;
-  margin: 0;
+  gap: 0.55rem;
+  margin: 1.6rem 0 0;
   padding: 0;
   list-style: none;
 }
@@ -136,7 +130,7 @@ defineProps<{
 .project-card li {
   color: var(--ink-faint);
   font-size: 0.6rem;
-  letter-spacing: 0.04em;
+  letter-spacing: 0.08em;
 
   &:not(:last-child)::after {
     margin-left: 0.45rem;
@@ -145,47 +139,74 @@ defineProps<{
   }
 }
 
-.project-card:hover {
-  .project-card__image {
-    filter: saturate(0.85) sepia(0.03);
-    transform: scale(1.04);
+.project-card__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.1rem;
+  margin-top: 2.2rem;
+
+  a {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.42rem;
+    padding-bottom: 0.32rem;
+    border-bottom: 1px solid var(--ink);
+    color: var(--ink);
+    font-size: 0.64rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    transition: color 300ms ease, gap 300ms ease;
+
+    &:hover {
+      gap: 0.7rem;
+      color: var(--sand-deep);
+    }
   }
 
-  .project-card__links {
-    opacity: 1;
-    transform: translateY(0);
+  svg {
+    width: 0.85rem;
+    height: 0.85rem;
   }
 }
 
-@media (max-width: 720px) {
+.project-card:hover {
+  .project-card__image {
+    filter: saturate(0.84) sepia(0.03);
+    transform: scale(1.025);
+  }
+}
+
+@media (max-width: 850px) {
+  .project-card,
+  .project-card--reversed {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+
+  .project-card--reversed {
+    .project-card__image-wrap,
+    .project-card__detail {
+      grid-row: auto;
+      grid-column: auto;
+    }
+  }
+
   .project-card__detail {
-    grid-template-columns: 1fr auto;
-    gap: 1rem;
+    max-width: 32rem;
   }
 
   .project-card__description {
-    grid-row: 2;
-    grid-column: 1 / -1;
-    max-width: 25rem;
-  }
-
-  .project-card ul {
-    justify-content: flex-end;
-  }
-
-  .project-card__links {
-    opacity: 1;
-    transform: none;
+    max-width: 29rem;
   }
 }
 
 @media (max-width: 460px) {
-  .project-card__detail {
-    grid-template-columns: 1fr;
+  .project-card h3 {
+    font-size: 2.2rem;
   }
 
-  .project-card ul {
-    justify-content: flex-start;
+  .project-card__actions {
+    margin-top: 1.8rem;
   }
 }
 </style>

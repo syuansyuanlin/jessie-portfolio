@@ -35,9 +35,9 @@ export const projects: Project[] = [
   {
     id: 'mori-journal',
     number: '01',
-    title: 'Mori Journal',
-    category: 'Editorial website · 2024',
-    description: '把慢生活寫成可以閱讀的日常，一個以文字與影像為中心的生活誌網站。',
+    title: 'Portfolio Website Design',
+    category: 'Editorial website · 2026',
+    description: '以「日系雜誌風格」為靈感，透過留白、圓形構圖與柔和色彩，營造輕盈、靜謐的氛圍。 在簡單中感受到細節，在距離中感受到溫度。',
     image: 'https://images.unsplash.com/photo-1497366811353-6870744d04b2?auto=format&fit=crop&w=1800&q=90',
     imageAlt: '柔和光線下的極簡室內空間',
     technologies: ['Vue 3', 'GSAP', 'Contentful'],

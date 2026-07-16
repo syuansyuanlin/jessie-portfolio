@@ -2,14 +2,16 @@
   --canvas: #ffffff;
   --canvas-deep: #ffffff;
   --paper: #ffffff;
-  --ink: #222222;
+  --ink: #444444;
   --ink-soft: #555555;
   --ink-faint: #888888;
   --sand: #d8c7b5;
-  --sand-deep: #b89e88;
+  --sand-deep: #d185a3;
   --line: rgba(34, 34, 34, 0.16);
   --font-sans: 'Inter', 'Noto Sans TC', sans-serif;
   --font-serif: 'Cormorant Garamond', 'Noto Serif TC', serif;
+  --font-heading: 'Cormorant Garamond', 'Noto Serif JP', serif;
+  --heading-letter-spacing: 0.045em;
   --gutter: clamp(1.25rem, 4vw, 4.5rem);
   --content: min(100% - (var(--gutter) * 2), 1360px);
 }
