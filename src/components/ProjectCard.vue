@@ -39,14 +39,14 @@ defineProps<{
 <style scoped lang="scss">
 .project-card {
   display: grid;
-  grid-template-columns: minmax(0, 1.12fr) minmax(17rem, 0.72fr);
+  grid-template-columns: minmax(0, 1.05fr) minmax(17rem, 0.8fr);
   align-items: center;
-  gap: clamp(2.75rem, 8vw, 9rem);
+  gap: clamp(2.5rem, 3vw, 3.5rem);
   width: 100%;
 }
 
 .project-card--reversed {
-  grid-template-columns: minmax(17rem, 0.72fr) minmax(0, 1.12fr);
+  grid-template-columns: minmax(17rem, 0.8fr) minmax(0, 1.05fr);
 
   .project-card__image-wrap {
     grid-row: 1;
@@ -63,12 +63,13 @@ defineProps<{
   position: relative;
   overflow: hidden;
   background: var(--canvas-deep);
+  border-radius: 0.5rem;
   box-shadow: 0 1.1rem 2.8rem rgba(34, 34, 34, 0.07);
 }
 
 .project-card__image {
   width: 100%;
-  aspect-ratio: 1.46;
+  aspect-ratio: 1.5;
   object-fit: cover;
   filter: saturate(0.72) sepia(0.08);
   transition: transform 1.1s cubic-bezier(0.22, 1, 0.36, 1), filter 800ms ease;

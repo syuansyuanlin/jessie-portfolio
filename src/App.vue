@@ -1,11 +1,14 @@
 <script setup lang="ts">
-import { onBeforeUnmount, onMounted } from 'vue'
+import { onBeforeUnmount, onMounted, ref } from 'vue'
 import Lenis from 'lenis'
 import AppHeader from '@/components/AppHeader.vue'
 import CustomCursor from '@/components/CustomCursor.vue'
+import PageLoader from '@/components/PageLoader.vue'
 
 let frameId = 0
 let lenis: Lenis | undefined
+const appContent = ref<HTMLElement | null>(null)
+const isLoading = ref(true)
 
 onMounted(() => {
   if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return
@@ -33,7 +36,21 @@ onBeforeUnmount(() => {
 </script>
 
 <template>
-  <AppHeader />
-  <RouterView />
+  <div ref="appContent" class="app__content" :class="{ 'app__content--loading': isLoading }">
+    <AppHeader />
+    <RouterView />
+  </div>
   <CustomCursor />
+  <PageLoader
+    v-if="isLoading"
+    :content-element="appContent"
+    @complete="isLoading = false"
+  />
 </template>
+
+<style scoped>
+.app__content--loading {
+  opacity: 0;
+  transform: translateY(1.875rem);
+}
+</style>

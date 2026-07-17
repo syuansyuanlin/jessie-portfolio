@@ -56,18 +56,21 @@ onMounted(() => {
   })
 
   let isVisible = false
+  let isInsideAbout = false
   let hoveredTarget: Element | null = null
 
   const updateHoverState = (target: EventTarget | null) => {
+    const nextIsInsideAbout = target instanceof Element && Boolean(target.closest('#about'))
     const nextTarget = target instanceof Element
       ? target.closest('.hover-target, a, button')
       : null
 
-    if (nextTarget === hoveredTarget) return
+    if (nextTarget === hoveredTarget && nextIsInsideAbout === isInsideAbout) return
 
+    isInsideAbout = nextIsInsideAbout
     hoveredTarget = nextTarget
     scaleTo(nextTarget ? 4 : 1)
-    opacityTo(nextTarget ? 0.32 : 1)
+    opacityTo(isInsideAbout ? 0 : nextTarget ? 0.32 : 1)
     haloScaleTo(nextTarget ? 1.4 : 0.4)
     haloOpacityTo(nextTarget ? 0.95 : 0)
   }
@@ -78,11 +81,12 @@ onMounted(() => {
     isVisible = true
     gsap.set(cursorElement, { autoAlpha: 1 })
     gsap.set(haloElement, { visibility: 'visible' })
-    opacityTo(hoveredTarget ? 0.32 : 1)
+    opacityTo(isInsideAbout ? 0 : hoveredTarget ? 0.32 : 1)
   }
 
   const hideCursor = () => {
     isVisible = false
+    isInsideAbout = false
     hoveredTarget = null
     scaleTo(1)
     opacityTo(0)
@@ -93,12 +97,12 @@ onMounted(() => {
   const handlePointerMove = (event: PointerEvent) => {
     if (event.pointerType !== 'mouse') return
 
+    updateHoverState(event.target)
     showCursor()
     xTo(event.clientX)
     yTo(event.clientY)
     haloXTo(event.clientX)
     haloYTo(event.clientY)
-    updateHoverState(event.target)
   }
 
   document.addEventListener('pointermove', handlePointerMove, { passive: true })
@@ -152,5 +156,4 @@ onBeforeUnmount(() => cleanup?.())
   pointer-events: none;
   will-change: transform, opacity;
 }
-
 </style>

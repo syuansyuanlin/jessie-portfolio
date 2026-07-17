@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { Icon } from "@iconify/vue";
-import profilePhoto from "@/assets/images/GuNEphFaYAA1JvO.jpg";
+import profilePhoto from "@/assets/images/S__189390853_0.jpg";
 
 function scrollToAbout() {
   document.querySelector("#about")?.scrollIntoView({ behavior: "smooth" });
@@ -112,21 +112,53 @@ function scrollToAbout() {
   left: 0.625rem;
   width: 30rem;
   height: 30rem;
+  overflow: hidden;
   transform: translateY(-50%);
-  background: linear-gradient(
-    135deg,
-    rgba(190, 226, 240, 0.38),
-    rgba(254, 223, 225, 0.24) 72%,
-    rgba(255, 247, 243, 0.7)
-  );
-  opacity: 0.7;
+  background:
+    radial-gradient(ellipse at 28% 22%, rgba(255, 255, 255, 0.58), transparent 28%),
+    radial-gradient(ellipse at 76% 78%, rgba(254, 223, 225, 0.14), transparent 48%),
+    linear-gradient(
+      135deg,
+      rgba(190, 222, 237, 0.21),
+      rgba(246, 247, 249, 0.3) 48%,
+      rgba(254, 223, 225, 0.18)
+    );
+  backdrop-filter: blur(4px) saturate(108%);
+  -webkit-backdrop-filter: blur(4px) saturate(108%);
+  border: 1px solid rgba(255, 255, 255, 0.62);
   box-shadow:
-    0 0 0.95rem rgba(255, 255, 255, 0.6),
-    inset 0 0 1.25rem rgba(255, 255, 255, 0.8);
+    0 1.1rem 2.4rem rgba(128, 157, 173, 0.08),
+    inset 0 0.08rem 0.1rem rgba(255, 255, 255, 0.5),
+    inset 0 -0.8rem 1.6rem rgba(160, 190, 204, 0.045),
+    inset 0 0 0 1px rgba(255, 255, 255, 0.16);
+  opacity: 0.78;
   transform-origin: center;
   animation:
     hero-bubble-morph 7s ease-in-out infinite alternate,
     hero-bubble-float 8s ease-in-out infinite;
+}
+
+.hero__bubble::before {
+  position: absolute;
+  top: 8%;
+  left: 10%;
+  width: 48%;
+  height: 10%;
+  border-radius: 50%;
+  background: linear-gradient(90deg, rgba(255, 255, 255, 0.36), rgba(255, 255, 255, 0));
+  content: '';
+  filter: blur(5px);
+  opacity: 0.5;
+  transform: rotate(-15deg);
+}
+
+.hero__bubble::after {
+  position: absolute;
+  inset: 1px;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: inherit;
+  content: '';
+  pointer-events: none;
 }
 
 .hero__bubble--pink {
@@ -135,12 +167,6 @@ function scrollToAbout() {
   left: 40%;
   width: 31.25rem;
   height: 31.25rem;
-  background: linear-gradient(
-    135deg,
-    rgba(190, 226, 240, 0.3),
-    rgba(254, 223, 225, 0.42) 70%,
-    rgba(255, 247, 243, 0.72)
-  );
   animation:
     hero-bubble-morph 9s ease-in-out infinite alternate,
     hero-bubble-float 10s ease-in-out infinite reverse;
@@ -156,46 +182,28 @@ function scrollToAbout() {
 @keyframes hero-bubble-morph {
   0% {
     border-radius: 60% 70% 57% 68% / 50% 65% 62% 68%;
-    box-shadow:
-      0 0 0.95rem rgba(255, 255, 255, 0.6),
-      inset 0 0 1.25rem rgba(255, 255, 255, 0.8);
   }
   20% {
     border-radius: 50% 80% 67% 70% / 55% 58% 70% 56%;
-    box-shadow:
-      0 0 1.25rem rgba(255, 255, 255, 0.7),
-      inset 0 0 1.55rem rgba(255, 255, 255, 0.85);
   }
   40% {
     border-radius: 72% 58% 73% 62% / 70% 68% 50% 60%;
-    box-shadow:
-      0 0 1.125rem rgba(255, 255, 255, 0.65),
-      inset 0 0 1.375rem rgba(255, 255, 255, 0.75);
   }
   60% {
     border-radius: 48% 82% 65% 75% / 75% 55% 80% 54%;
-    box-shadow:
-      0 0 1.375rem rgba(255, 255, 255, 0.75),
-      inset 0 0 1.75rem rgba(255, 255, 255, 0.9);
   }
   80% {
     border-radius: 72% 59% 80% 54% / 48% 77% 52%;
-    box-shadow:
-      0 0 1.0625rem rgba(255, 255, 255, 0.6),
-      inset 0 0 1.3125rem rgba(255, 255, 255, 0.7);
   }
   100% {
     border-radius: 60% 70% 57% 68% / 50% 65% 62% 68%;
-    box-shadow:
-      0 0 0.95rem rgba(255, 255, 255, 0.6),
-      inset 0 0 1.25rem rgba(255, 255, 255, 0.8);
   }
 }
 
 @keyframes hero-bubble-float {
   0% {
     transform: translateY(-50%) translate(0);
-    opacity: 0.7;
+    opacity: 0.74;
   }
   25% {
     transform: translateY(-48%) translate(0.95rem);
@@ -203,15 +211,15 @@ function scrollToAbout() {
   }
   50% {
     transform: translateY(-52%) translate(0.3rem);
-    opacity: 0.75;
+    opacity: 0.76;
   }
   75% {
     transform: translateY(-47%) translate(-0.625rem);
-    opacity: 0.85;
+    opacity: 0.82;
   }
   100% {
     transform: translateY(-50%) translate(0);
-    opacity: 0.7;
+    opacity: 0.74;
   }
 }
 

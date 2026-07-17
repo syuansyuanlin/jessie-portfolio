@@ -54,8 +54,9 @@ import ProjectCard from '@/components/ProjectCard.vue'
 .projects__list {
   display: flex;
   flex-direction: column;
-  gap: clamp(7rem, 14vw, 13rem);
-  margin-top: clamp(5.5rem, 12vw, 11rem);
+  width: min(100%, 67.5rem);
+  gap: clamp(2.5rem, 4vw, 4rem);
+  margin: clamp(5.5rem, 12vw, 11rem) auto 0;
 }
 
 @media (max-width: 850px) {
