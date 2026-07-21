@@ -3,6 +3,7 @@ import HeroSection from '@/components/HeroSection.vue'
 import AboutSection from '@/components/AboutSection.vue'
 import SkillsSection from '@/components/SkillsSection.vue'
 import ProjectsSection from '@/components/ProjectsSection.vue'
+import IllustrationCarousel from '@/components/IllustrationCarousel.vue'
 import ExperienceSection from '@/components/ExperienceSection.vue'
 import ContactSection from '@/components/ContactSection.vue'
 import AppFooter from '@/components/AppFooter.vue'
@@ -17,6 +18,7 @@ const { scope } = useReveal()
     <AboutSection />
     <SkillsSection />
     <ProjectsSection />
+    <IllustrationCarousel />
     <ExperienceSection />
     <ContactSection />
   </main>

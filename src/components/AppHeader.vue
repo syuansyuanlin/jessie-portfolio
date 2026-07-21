@@ -1,12 +1,20 @@
 <script setup lang="ts">
 import { Icon } from "@iconify/vue";
+import { useRoute, useRouter } from "vue-router";
 import { navigation } from "@/data/portfolio";
 import { useUiStore } from "@/stores/ui";
 
 const ui = useUiStore();
+const route = useRoute();
+const router = useRouter();
 
 function goTo(target: string) {
   ui.closeMenu();
+  if (route.path !== "/") {
+    router.push({ path: "/", hash: target });
+    return;
+  }
+
   document.querySelector(target)?.scrollIntoView({ behavior: "smooth" });
 }
 </script>

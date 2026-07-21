@@ -131,7 +131,8 @@ function scrollToAbout() {
     inset 0 0.08rem 0.1rem rgba(255, 255, 255, 0.5),
     inset 0 -0.8rem 1.6rem rgba(160, 190, 204, 0.045),
     inset 0 0 0 1px rgba(255, 255, 255, 0.16);
-  opacity: 0.78;
+  /* Keep the hero bubbles on the same glass colour scale as the capabilities bubbles. */
+  opacity: 1;
   transform-origin: center;
   animation:
     hero-bubble-morph 7s ease-in-out infinite alternate,
@@ -203,23 +204,23 @@ function scrollToAbout() {
 @keyframes hero-bubble-float {
   0% {
     transform: translateY(-50%) translate(0);
-    opacity: 0.74;
+    opacity: 1;
   }
   25% {
     transform: translateY(-48%) translate(0.95rem);
-    opacity: 0.8;
+    opacity: 1;
   }
   50% {
     transform: translateY(-52%) translate(0.3rem);
-    opacity: 0.76;
+    opacity: 1;
   }
   75% {
     transform: translateY(-47%) translate(-0.625rem);
-    opacity: 0.82;
+    opacity: 1;
   }
   100% {
     transform: translateY(-50%) translate(0);
-    opacity: 0.74;
+    opacity: 1;
   }
 }
 

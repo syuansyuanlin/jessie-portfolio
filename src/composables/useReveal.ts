@@ -19,16 +19,17 @@ export function useReveal() {
         const delay = Number(element.dataset.revealDelay ?? 0)
         gsap.fromTo(
           element,
-          { autoAlpha: 0, y: 28 },
+          { autoAlpha: 0, y: 60 },
           {
             autoAlpha: 1,
             y: 0,
-            duration: 1.05,
+            duration: 1.15,
             delay,
             ease: 'power3.out',
             scrollTrigger: {
               trigger: element,
-              start: 'top 88%',
+              start: 'top 86%',
+              invalidateOnRefresh: true,
               once: true,
             },
           },

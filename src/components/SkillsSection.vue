@@ -43,6 +43,10 @@ import { skills } from '@/data/portfolio'
 
 <style scoped lang="scss">
 .skills {
+  position: sticky;
+  z-index: 0;
+  top: 0;
+  min-height: 100svh;
   padding: clamp(6rem, 12vw, 11rem) 0;
   overflow: hidden;
   background: var(--canvas-deep);
@@ -269,6 +273,12 @@ import { skills } from '@/data/portfolio'
 }
 
 @media (max-width: 850px) {
+  .skills {
+    position: relative;
+    top: auto;
+    min-height: 0;
+  }
+
   .skills__scene {
     display: grid;
     gap: 2rem;
@@ -303,6 +313,14 @@ import { skills } from '@/data/portfolio'
 
   .skill-group__float {
     min-height: 15rem;
+  }
+}
+
+@media (max-height: 70rem) and (min-width: 851px) {
+  .skills {
+    position: relative;
+    top: auto;
+    min-height: 0;
   }
 }
 

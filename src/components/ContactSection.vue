@@ -68,7 +68,7 @@ const contacts = [
   max-width: 60rem;
   margin: clamp(2rem, 5vw, 4.5rem) 0 0;
   font-family: var(--font-heading);
-  font-size: clamp(4rem, 6.667vw, 8rem);
+  font-size: clamp(2.5rem, 4.267vw, 6rem);
   font-weight: 400;
   letter-spacing: var(--heading-letter-spacing);
   line-height: 0.88;

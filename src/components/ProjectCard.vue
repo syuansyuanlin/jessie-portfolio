@@ -9,7 +9,10 @@ defineProps<{
 </script>
 
 <template>
-  <article class="project-card" :class="{ 'project-card--reversed': reversed }">
+  <article
+    class="project-card"
+    :class="{ 'project-card--reversed': reversed }"
+  >
     <div class="project-card__image-wrap">
       <img class="project-card__image" :src="project.image" :alt="project.imageAlt" loading="lazy" />
       <p class="project-card__number">{{ project.number }}</p>
@@ -63,8 +66,8 @@ defineProps<{
   position: relative;
   overflow: hidden;
   background: var(--canvas-deep);
-  border-radius: 0.5rem;
-  box-shadow: 0 1.1rem 2.8rem rgba(34, 34, 34, 0.07);
+  border-radius: 1.4rem;
+  box-shadow: 0 1.1rem 2.8rem rgba(34, 34, 34, 0.06);
 }
 
 .project-card__image {
@@ -77,14 +80,16 @@ defineProps<{
 
 .project-card__number {
   position: absolute;
-  top: 1.2rem;
-  left: 1.2rem;
+  top: 0;
+  left: 0;
   margin: 0;
-  padding: 0.24rem 0.45rem;
-  background: rgba(255, 255, 255, 0.86);
-  color: var(--ink-soft);
-  font-size: 0.62rem;
-  letter-spacing: 0.14em;
+  padding: 0.7rem 1rem 0.76rem;
+  border-radius: 0 0 1.15rem 0;
+  background: #d185a3;
+  color: #fffdf8;
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
 }
 
 .project-card__detail {
@@ -199,6 +204,7 @@ defineProps<{
   .project-card__description {
     max-width: 29rem;
   }
+
 }
 
 @media (max-width: 460px) {
@@ -209,5 +215,6 @@ defineProps<{
   .project-card__actions {
     margin-top: 1.8rem;
   }
+
 }
 </style>

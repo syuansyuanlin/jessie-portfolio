@@ -1,0 +1,154 @@
+<script setup lang="ts">
+import { nextTick, onBeforeUnmount, onMounted, ref } from 'vue'
+import illustrationRibbon from '@/assets/images/S__189390854_0.jpg'
+import illustrationFloat from '@/assets/images/S__189390853_0.jpg'
+import illustrationTea from '@/assets/images/S__189390852_0.jpg'
+import illustrationPortrait from '@/assets/images/GuNEphFaYAA1JvO.jpg'
+
+interface SwiperInstance {
+  destroy: (deleteInstance?: boolean, cleanStyles?: boolean) => void
+}
+
+interface SwiperConstructor {
+  new (element: HTMLElement, options: Record<string, unknown>): SwiperInstance
+}
+
+declare global {
+  interface Window {
+    Swiper?: SwiperConstructor
+  }
+}
+
+const illustrations = [
+  { image: illustrationRibbon, title: 'Ribbon day', category: 'Character study' },
+  { image: illustrationFloat, title: 'Sweet float', category: 'Summer sketch' },
+  { image: illustrationTea, title: 'Tea time', category: 'Small story' },
+  { image: illustrationPortrait, title: 'Soft portrait', category: 'Character study' },
+]
+const carouselIllustrations = [...illustrations, ...illustrations, ...illustrations]
+
+const carousel = ref<HTMLElement | null>(null)
+let swiper: SwiperInstance | undefined
+
+onMounted(async () => {
+  await nextTick()
+  if (!carousel.value || !window.Swiper) return
+
+  const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches
+
+  swiper = new window.Swiper(carousel.value, {
+    slidesPerView: 'auto',
+    spaceBetween: 0,
+    centeredSlides: false,
+    loop: true,
+    loopAdditionalSlides: 4,
+    speed: 10000,
+    grabCursor: true,
+    allowTouchMove: true,
+    autoplay: reduceMotion
+      ? false
+      : {
+          delay: 0,
+          disableOnInteraction: false,
+          pauseOnMouseEnter: false,
+        },
+  })
+})
+
+onBeforeUnmount(() => swiper?.destroy(true, true))
+</script>
+
+<template>
+  <section id="illustrations" class="illustrations" aria-labelledby="illustrations-title">
+    <div class="illustrations__intro section-shell" data-reveal>
+      <p class="eyebrow">04 / Illustration archive</p>
+      <div>
+        <h2 id="illustrations-title" class="display-title">Drawn with<br /><em>feeling.</em></h2>
+        <p>把日常裡的小小想像，畫成柔軟的角色。</p>
+      </div>
+    </div>
+
+    <div ref="carousel" class="illustrations__carousel swiper" aria-label="插畫作品輪播" data-reveal>
+      <div class="swiper-wrapper">
+        <article v-for="(illustration, index) in carouselIllustrations" :key="`${illustration.title}-${index}`" class="illustration-card swiper-slide">
+          <img :src="illustration.image" :alt="illustration.title" />
+          <p class="sr-only">{{ String(index + 1).padStart(2, '0') }} / {{ illustration.category }} — {{ illustration.title }}</p>
+        </article>
+      </div>
+    </div>
+  </section>
+</template>
+
+<style scoped lang="scss">
+.illustrations {
+  position: relative;
+  z-index: 2;
+  overflow: hidden;
+  padding: clamp(7rem, 14vw, 13rem) 0 clamp(7rem, 12vw, 11rem);
+  background: #ffffff;
+}
+
+.illustrations__intro {
+  display: grid;
+  grid-template-columns: minmax(8rem, 0.45fr) 1fr;
+  gap: clamp(2rem, 8vw, 10rem);
+
+  .display-title {
+    font-size: clamp(2.4rem, 4.186vw, 4.75rem);
+  }
+
+  em {
+    color: var(--sand-deep);
+    font-weight: inherit;
+  }
+
+  div > p {
+    max-width: 18rem;
+    margin: 1.5rem 0 0 0.25rem;
+    color: var(--ink-faint);
+    font-size: 0.78rem;
+    letter-spacing: 0.06em;
+  }
+}
+
+.illustrations__carousel {
+  width: 100%;
+  margin-top: clamp(4.5rem, 9vw, 8rem);
+  overflow: hidden;
+  border-top: 1px solid rgba(209, 133, 163, 0.74);
+  border-bottom: 1px solid rgba(209, 133, 163, 0.74);
+
+  :deep(.swiper-wrapper) {
+    align-items: stretch;
+    transition-timing-function: linear !important;
+  }
+}
+
+.illustration-card {
+  position: relative;
+  width: clamp(16rem, 28vw, 30rem);
+  aspect-ratio: 1;
+  overflow: hidden;
+  background: #f7eff0;
+
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    filter: saturate(0.92) sepia(0.03);
+  }
+}
+
+@media (max-width: 850px) {
+  .illustrations__intro {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+}
+
+@media (max-width: 639px) {
+  .illustration-card {
+    width: clamp(14rem, 72vw, 19rem);
+  }
+}
+</style>

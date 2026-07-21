@@ -114,10 +114,10 @@ onBeforeUnmount(() => {
         <p>
           透過自學與實務專案累積設計與開發能力，致力於將設計理念轉化為實際可使用的產品與系統。
         </p>
-        <a class="about__more" href="#contact">
+        <RouterLink class="about__more" to="/about">
           <span class="about__more-label">View More</span>
           <span class="about__more-circle" aria-hidden="true">→</span>
-        </a>
+        </RouterLink>
       </div>
     </div>
 

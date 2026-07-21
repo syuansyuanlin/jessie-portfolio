@@ -1,12 +1,17 @@
 <script setup lang="ts">
 import { onBeforeUnmount, onMounted, ref } from 'vue'
 import Lenis from 'lenis'
+import { gsap } from 'gsap'
+import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import AppHeader from '@/components/AppHeader.vue'
 import CustomCursor from '@/components/CustomCursor.vue'
 import PageLoader from '@/components/PageLoader.vue'
 
+gsap.registerPlugin(ScrollTrigger)
+
 let frameId = 0
 let lenis: Lenis | undefined
+const syncScrollTrigger = () => ScrollTrigger.update()
 const appContent = ref<HTMLElement | null>(null)
 const isLoading = ref(true)
 
@@ -14,12 +19,13 @@ onMounted(() => {
   if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return
 
   lenis = new Lenis({
-    duration: 1.15,
+    duration: 1.2,
     smoothWheel: true,
-    wheelMultiplier: 0.82,
+    wheelMultiplier: 0.85,
     touchMultiplier: 1.1,
     easing: (value: number) => Math.min(1, 1.001 - Math.pow(2, -10 * value)),
   })
+  lenis.on('scroll', syncScrollTrigger)
 
   const animate = (time: number) => {
     lenis?.raf(time)
@@ -31,8 +37,14 @@ onMounted(() => {
 
 onBeforeUnmount(() => {
   cancelAnimationFrame(frameId)
+  lenis?.off('scroll', syncScrollTrigger)
   lenis?.destroy()
 })
+
+const completeLoading = () => {
+  isLoading.value = false
+  requestAnimationFrame(() => ScrollTrigger.refresh())
+}
 </script>
 
 <template>
@@ -44,7 +56,7 @@ onBeforeUnmount(() => {
   <PageLoader
     v-if="isLoading"
     :content-element="appContent"
-    @complete="isLoading = false"
+    @complete="completeLoading"
   />
 </template>
 
