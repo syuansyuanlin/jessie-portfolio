@@ -5,6 +5,12 @@ import ProjectCard from '@/components/ProjectCard.vue'
 
 <template>
   <section id="works" class="projects" aria-labelledby="projects-title">
+    <div class="projects__marquee" aria-label="Jessie Design">
+      <div class="projects__marquee-track" aria-hidden="true">
+        <span v-for="index in 8" :key="index">Jessie<span>♡</span>Design．</span>
+      </div>
+    </div>
+
     <div class="projects__shell section-shell">
       <div class="projects__heading">
         <p class="eyebrow" data-reveal>03 / Selected works</p>
@@ -42,6 +48,51 @@ import ProjectCard from '@/components/ProjectCard.vue'
 .projects__shell {
   padding-top: clamp(8rem, 15vw, 14rem);
   padding-bottom: clamp(8rem, 17vw, 16rem);
+}
+
+.projects__marquee {
+  overflow: hidden;
+  padding: 0.75rem 0 0.9rem;
+  border-top: 1px solid rgba(209, 133, 163, 0.45);
+  border-bottom: 1px solid rgba(209, 133, 163, 0.45);
+  background: rgba(255, 255, 255, 0.54);
+  white-space: nowrap;
+}
+
+.projects__marquee-track {
+  display: flex;
+  width: max-content;
+  animation: projects-marquee 30s linear infinite;
+  will-change: transform;
+
+  span {
+    display: inline-block;
+    margin-right: clamp(2.8rem, 5vw, 5.5rem);
+    color: transparent;
+    font-family: var(--font-sans);
+    font-size: clamp(1.6rem, 2.75vw, 3rem);
+    font-weight: 600;
+    letter-spacing: 0.09em;
+    line-height: 1;
+    text-shadow: 0.28rem 0.3rem 0 rgba(243, 235, 126, 0.28);
+    text-transform: uppercase;
+    -webkit-text-stroke: 1px rgba(74, 181, 171, 0.72);
+  }
+
+  span span {
+    margin: 0 0.06em;
+    color: transparent;
+    font-family: var(--font-sans);
+    font-size: 0.76em;
+    vertical-align: 0.08em;
+    -webkit-text-stroke: 1px rgba(74, 181, 171, 0.72);
+  }
+}
+
+@keyframes projects-marquee {
+  to {
+    transform: translateX(-50%);
+  }
 }
 
 .projects__heading {
@@ -85,5 +136,11 @@ import ProjectCard from '@/components/ProjectCard.vue'
     gap: 1.5rem;
   }
 
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .projects__marquee-track {
+    animation-play-state: paused;
+  }
 }
 </style>

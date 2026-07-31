@@ -68,6 +68,13 @@ onBeforeUnmount(() => swiper?.destroy(true, true))
       </div>
     </div>
 
+    <div class="illustrations__carousel-actions section-shell" data-reveal>
+      <a class="illustrations__more" href="#illustrations">
+        <span class="illustrations__more-label">View More</span>
+        <span class="illustrations__more-circle" aria-hidden="true">→</span>
+      </a>
+    </div>
+
     <div ref="carousel" class="illustrations__carousel swiper" aria-label="插畫作品輪播" data-reveal>
       <div class="swiper-wrapper">
         <article v-for="(illustration, index) in carouselIllustrations" :key="`${illustration.title}-${index}`" class="illustration-card swiper-slide">
@@ -113,7 +120,7 @@ onBeforeUnmount(() => swiper?.destroy(true, true))
 
 .illustrations__carousel {
   width: 100%;
-  margin-top: clamp(4.5rem, 9vw, 8rem);
+  margin-top: clamp(2rem, 4vw, 3.25rem);
   overflow: hidden;
   border-top: 1px solid rgba(209, 133, 163, 0.74);
   border-bottom: 1px solid rgba(209, 133, 163, 0.74);
@@ -122,6 +129,47 @@ onBeforeUnmount(() => swiper?.destroy(true, true))
     align-items: stretch;
     transition-timing-function: linear !important;
   }
+}
+
+.illustrations__carousel-actions {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.illustrations__more {
+  display: inline-flex;
+  align-items: center;
+  gap: 1.25rem;
+  color: var(--ink);
+
+  &:focus-visible {
+    outline: 2px solid var(--sand-deep);
+    outline-offset: 0.4rem;
+  }
+
+  &:hover .illustrations__more-circle {
+    background: var(--ink);
+    color: var(--paper);
+    transform: scale(1.16);
+  }
+}
+
+.illustrations__more-label {
+  font-family: var(--font-heading);
+  font-size: 18px;
+  letter-spacing: -0.025em;
+}
+
+.illustrations__more-circle {
+  display: grid;
+  width: clamp(4.5rem, 6vw, 5.75rem);
+  height: clamp(4.5rem, 6vw, 5.75rem);
+  place-items: center;
+  border: 1px solid currentcolor;
+  border-radius: 50%;
+  font-size: 1.45rem;
+  line-height: 1;
+  transition: transform 500ms cubic-bezier(0.22, 1, 0.36, 1), background-color 350ms ease, color 350ms ease;
 }
 
 .illustration-card {
