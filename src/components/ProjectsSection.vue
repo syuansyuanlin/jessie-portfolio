@@ -7,7 +7,15 @@ import ProjectCard from '@/components/ProjectCard.vue'
   <section id="works" class="projects" aria-labelledby="projects-title">
     <div class="projects__marquee" aria-label="Jessie Design">
       <div class="projects__marquee-track" aria-hidden="true">
-        <span v-for="index in 8" :key="index">Jessie<span>♡</span>Design．</span>
+        <svg
+          v-for="index in 8"
+          :key="index"
+          class="projects__marquee-word"
+          viewBox="0 0 850 110"
+          focusable="false"
+        >
+          <text class="projects__marquee-text" x="5" y="84">Jessie♡Design．</text>
+        </svg>
       </div>
     </div>
 
@@ -53,39 +61,33 @@ import ProjectCard from '@/components/ProjectCard.vue'
 .projects__marquee {
   overflow: hidden;
   padding: 0.75rem 0 0.9rem;
-  border-top: 1px solid rgba(209, 133, 163, 0.45);
-  border-bottom: 1px solid rgba(209, 133, 163, 0.45);
-  background: rgba(255, 255, 255, 0.54);
   white-space: nowrap;
 }
 
 .projects__marquee-track {
   display: flex;
   width: max-content;
-  animation: projects-marquee 30s linear infinite;
+  animation: projects-marquee 48s linear infinite;
   will-change: transform;
 
-  span {
-    display: inline-block;
-    margin-right: clamp(2.8rem, 5vw, 5.5rem);
-    color: transparent;
-    font-family: var(--font-sans);
-    font-size: clamp(1.6rem, 2.75vw, 3rem);
-    font-weight: 600;
-    letter-spacing: 0.09em;
-    line-height: 1;
-    text-shadow: 0.28rem 0.3rem 0 rgba(243, 235, 126, 0.28);
-    text-transform: uppercase;
-    -webkit-text-stroke: 1px rgba(74, 181, 171, 0.72);
+  > .projects__marquee-word {
+    display: block;
+    flex: 0 0 auto;
+    width: clamp(22rem, 30vw, 25rem);
+    height: clamp(3.1rem, 4.8vw, 5.3rem);
+    margin-right: clamp(0.75rem, 1vw, 1.25rem);
   }
 
-  span span {
-    margin: 0 0.06em;
-    color: transparent;
-    font-family: var(--font-sans);
-    font-size: 0.76em;
-    vertical-align: 0.08em;
-    -webkit-text-stroke: 1px rgba(74, 181, 171, 0.72);
+  .projects__marquee-text {
+    fill: none;
+    font-family: var(--font-heading);
+    font-size: 84px;
+    font-weight: 400;
+    letter-spacing: 3px;
+    stroke: #d2d2d2;
+    stroke-width: 1.6px;
+    stroke-linecap: round;
+    stroke-linejoin: round;
   }
 }
 
@@ -143,4 +145,5 @@ import ProjectCard from '@/components/ProjectCard.vue'
     animation-play-state: paused;
   }
 }
+
 </style>

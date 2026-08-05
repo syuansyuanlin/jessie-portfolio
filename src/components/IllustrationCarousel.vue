@@ -90,9 +90,27 @@ onBeforeUnmount(() => swiper?.destroy(true, true))
 .illustrations {
   position: relative;
   z-index: 2;
-  overflow: hidden;
+  isolation: isolate;
+  overflow: visible;
   padding: clamp(7rem, 14vw, 13rem) 0 clamp(7rem, 12vw, 11rem);
   background: #ffffff;
+}
+
+.illustrations::before {
+  position: absolute;
+  z-index: 0;
+  top: clamp(-12rem, -14vw, -7rem);
+  right: 0;
+  left: 0;
+  height: clamp(7rem, 14vw, 12rem);
+  background: linear-gradient(180deg, rgba(249, 249, 249, 0) 0%, #ffffff 100%);
+  content: '';
+  pointer-events: none;
+}
+
+.illustrations > * {
+  position: relative;
+  z-index: 1;
 }
 
 .illustrations__intro {

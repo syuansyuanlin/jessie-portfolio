@@ -235,6 +235,7 @@ onBeforeUnmount(() => {
   width: min(100%, 29rem);
   margin: clamp(1.75rem, 3vw, 3rem) 0 0;
   padding-top: 0;
+  transform: translateX(clamp(1.25rem, 2.5vw, 2rem));
   color: var(--ink-soft);
   font-size: 0.86rem;
   line-height: 2.05;
@@ -287,11 +288,11 @@ onBeforeUnmount(() => {
   grid-row: 1;
   align-self: start;
   position: relative;
-  z-index: 0;
+  z-index: 2;
   width: min(85%, 18rem);
   margin: 0;
   justify-self: start;
-  transform: translateX(clamp(-13rem, -11vw, -7rem));
+  transform: translateX(clamp(-8rem, -5vw, -2.5rem));
 
   img {
     width: 100%;
@@ -335,6 +336,7 @@ onBeforeUnmount(() => {
 
   .about__story {
     margin: 2rem 0 0 auto;
+    transform: none;
   }
 }
 
