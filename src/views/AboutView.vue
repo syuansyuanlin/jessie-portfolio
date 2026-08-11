@@ -1,14 +1,29 @@
 <script setup lang="ts">
-import aboutPhoto from '@/assets/images/my-photo.jpg'
-import { experiences, skills } from '@/data/portfolio'
+import aboutPhoto from '@/assets/images/S__190988291.jpg'
+import azureAiCertificate from '@/assets/images/azureai.png'
+import aiCertificate from '@/assets/images/ai.png'
+import powerBiCertificate from '@/assets/images/powerbi.png'
 import { useReveal } from '@/composables/useReveal'
 
 const { scope } = useReveal()
 
-const profileFacts = [
-  ['Role', 'UI Designer / Front-end Developer'],
-  ['Based in', 'Taipei, Taiwan'],
-  ['Focus', 'Thoughtful interfaces & gentle interactions'],
+const workExperiences = [
+  {
+    period: '2025 / 07 — Present',
+    role: 'Web Developer',
+    company: '旭海國際科技股份有限公司',
+    industry: '旅遊服務業 · 30–100 人',
+    location: '台北市中山區',
+    summary: '負責旅宿業 WordPress 網站建置與維護，依需求調整版型、功能及互動，並進行外掛整合、效能優化、SEO 設定與客戶技術支援。',
+  },
+  {
+    period: '2023 / 11 — 2025 / 06',
+    role: 'Front-End Developer',
+    company: '云碩科技股份有限公司',
+    industry: '電腦系統整合服務業 · 1–30 人',
+    location: '台北市中山區',
+    summary: '使用 Microsoft Power Platform 開發企業內部系統與流程自動化，參與 React 前端專案，負責 UI 製作、功能開發及客戶需求訪談與系統導入。',
+  },
 ]
 
 const certificates = [
@@ -16,6 +31,24 @@ const certificates = [
   { number: '02', title: 'Certificate title', detail: 'Issuing organisation · year' },
   { number: '03', title: 'Certificate title', detail: 'Issuing organisation · year' },
 ]
+
+const certificateContent: Record<string, { image: string; title: string; detail: string }> = {
+  '01': {
+    image: azureAiCertificate,
+    title: 'Azure AI Fundamentals',
+    detail: 'Microsoft · 2024',
+  },
+  '02': {
+    image: aiCertificate,
+    title: 'Generative AI Certification',
+    detail: 'Institute for Information Industry · 2025',
+  },
+  '03': {
+    image: powerBiCertificate,
+    title: 'Power BI Data Analysis',
+    detail: 'BIPBD Power BI Desktop · 2024',
+  },
+}
 </script>
 
 <template>
@@ -24,6 +57,14 @@ const certificates = [
       <p class="eyebrow about-page__eyebrow" data-reveal>About / 01</p>
 
       <div class="about-page__hero-layout">
+        <span class="about-page__hero-bubble about-page__hero-bubble--top" aria-hidden="true" />
+        <span class="about-page__hero-bubble about-page__hero-bubble--bottom" aria-hidden="true" />
+
+        <h1 id="about-page-title" class="about-page__hero-title display-title" data-reveal>
+          A little more<br />
+          <em>about me.</em>
+        </h1>
+
         <figure class="about-page__hero-photo" data-reveal>
           <img :src="aboutPhoto" alt="Jessie Lin 的個人照片" />
           <figcaption>Jessie Lin / Portfolio</figcaption>
@@ -31,10 +72,17 @@ const certificates = [
 
         <div class="about-page__hero-copy" data-reveal data-reveal-delay="0.1">
           <p class="about-page__kicker">UI Designer · Front-end Developer</p>
-          <h1 id="about-page-title" class="display-title">
-            A little more<br />
-            <em>about me.</em>
-          </h1>
+          <div class="about-page__hero-intro">
+            <p>
+              曾於系統整合公司任職，負責企業系統介面設計與開發，運用 Microsoft Power Platform 工具協助企業完成流程數位化，並參與 AI 應用平台前端開發，累積企業系統規劃、流程自動化與跨團隊協作經驗。
+            </p>
+            <p>
+              目前負責旅宿業網站建置與維護，已參與多家飯店及旅宿品牌官網建置，依客戶需求進行網站客製化、功能調整與效能優化，協助企業建立品牌形象並提升網站維運效率，同時提供後台操作教學與技術支援。
+            </p>
+            <p>
+              未來希望結合設計思維與開發能力，持續打造兼具美感、易用性與實際價值的數位產品。
+            </p>
+          </div>
           <p>
             從靜靜觀察開始，把想法整理成清楚、溫柔且容易使用的數位體驗。
           </p>
@@ -47,90 +95,54 @@ const certificates = [
 
     <section id="profile" class="about-page__section about-page__profile section-shell" aria-labelledby="profile-title">
       <div class="about-page__section-label" data-reveal>
-        <p class="eyebrow">01 / Profile</p>
-        <span>個人簡介</span>
+        <p class="eyebrow">Experience / 02</p>
+        <span>工作經歷</span>
       </div>
 
-      <div class="about-page__profile-content" data-reveal>
-        <h2 id="profile-title">Designing with<br /><em>care & clarity.</em></h2>
-        <div class="about-page__profile-copy">
-          <p>
-            我是 Jessie，一位專注於 UI 設計與前端開發的創作者。喜歡從使用者的感受出發，將複雜的需求轉譯成自然、可理解的畫面與互動。
-          </p>
-          <p>
-            對我來說，好的設計不只好看，也應該在每一次操作裡讓人感到安心與自在。
-          </p>
-        </div>
-      </div>
+      <div class="about-page__career-content">
+        <h2 id="profile-title" class="sr-only">Experience</h2>
+        <ol class="about-page__career-list">
+          <li v-for="experience in workExperiences" :key="experience.period" data-reveal>
+            <div class="about-page__career-period">
+              <p>{{ experience.period }}</p>
+            </div>
 
-      <dl class="about-page__facts" data-reveal data-reveal-delay="0.1">
-        <div v-for="([label, value], index) in profileFacts" :key="label">
-          <dt>0{{ index + 1 }} / {{ label }}</dt>
-          <dd>{{ value }}</dd>
-        </div>
-      </dl>
-    </section>
+            <div class="about-page__career-detail">
+              <h3>{{ experience.role }}</h3>
+              <p class="about-page__career-company">{{ experience.company }}</p>
+            </div>
 
-    <section class="about-page__section about-page__skills section-shell" aria-labelledby="skills-title">
-      <div class="about-page__section-label" data-reveal>
-        <p class="eyebrow">02 / Capabilities</p>
-        <span>技能</span>
-      </div>
-
-      <div class="about-page__section-heading" data-reveal>
-        <h2 id="skills-title">A thoughtful<br /><em>set of tools.</em></h2>
-        <p>在設計與開發之間切換，讓每個細節都能被好好實現。</p>
-      </div>
-
-      <div class="about-page__skill-grid">
-        <article v-for="(group, index) in skills" :key="group.id" class="about-page__skill-card" data-reveal>
-          <p>0{{ index + 1 }} / {{ group.label }}</p>
-          <h3>{{ group.label }}</h3>
-          <div>
-            <span v-for="skill in group.skills" :key="skill">{{ skill }}</span>
-          </div>
-        </article>
+            <p class="about-page__career-summary">{{ experience.summary }}</p>
+          </li>
+        </ol>
       </div>
     </section>
 
-    <section class="about-page__section about-page__experience section-shell" aria-labelledby="experience-title">
-      <div class="about-page__section-label" data-reveal>
-        <p class="eyebrow">03 / Experience</p>
-        <span>經歷</span>
+    <div class="about-page__skills-marquee" aria-label="Jessie Design">
+      <div class="about-page__skills-marquee-track" aria-hidden="true">
+        <svg
+          v-for="index in 8"
+          :key="index"
+          class="about-page__skills-marquee-word"
+          viewBox="0 0 850 110"
+          focusable="false"
+        >
+          <text x="5" y="84">Jessie♡Design．</text>
+        </svg>
       </div>
+    </div>
 
-      <div class="about-page__section-heading" data-reveal>
-        <h2 id="experience-title">Growing through<br /><em>every project.</em></h2>
-      </div>
-
-      <ol class="about-page__timeline">
-        <li v-for="experience in experiences" :key="`${experience.period}-${experience.role}`" data-reveal>
-          <p class="about-page__timeline-period">{{ experience.period }}</p>
-          <div>
-            <h3>{{ experience.role }}</h3>
-            <p class="about-page__timeline-company">{{ experience.company }}</p>
-          </div>
-          <p class="about-page__timeline-description">{{ experience.description }}</p>
-        </li>
-      </ol>
-    </section>
-
-    <section class="about-page__section about-page__certificates section-shell" aria-labelledby="certificates-title">
+    <section class="about-page__section about-page__certificates section-shell" aria-label="Credentials">
       <div class="about-page__section-label" data-reveal>
-        <p class="eyebrow">04 / Credentials</p>
+        <p class="eyebrow">Credentials / 04</p>
         <span>相關證照</span>
-      </div>
-
-      <div class="about-page__section-heading" data-reveal>
-        <h2 id="certificates-title">Learning, always<br /><em>in progress.</em></h2>
-        <p>把你的證照名稱、發證單位與取得年份填入下方卡片即可。</p>
       </div>
 
       <div class="about-page__certificate-grid">
         <article v-for="certificate in certificates" :key="certificate.number" class="about-page__certificate" data-reveal>
-          <span>{{ certificate.number }}</span>
-          <h3>{{ certificate.title }}</h3>
-          <p>{{ certificate.detail }}</p>
+          <img :src="certificateContent[certificate.number].image" :alt="certificateContent[certificate.number].title" />
+          <p class="about-page__certificate-meta">{{ certificateContent[certificate.number].detail }}</p>
+          <h3>{{ certificateContent[certificate.number].title }}</h3>
         </article>
       </div>
     </section>
@@ -150,7 +162,7 @@ const certificates = [
 
 .about-page__hero {
   position: relative;
-  min-height: max(48rem, 100svh);
+  min-height: max(47rem, 100svh);
   padding-top: clamp(8rem, 14vw, 11rem);
   padding-bottom: 3.5rem;
 }
@@ -164,44 +176,110 @@ const certificates = [
   position: relative;
   z-index: 1;
   display: grid;
-  grid-template-columns: minmax(16rem, 0.85fr) minmax(18rem, 1.15fr);
-  align-items: center;
-  gap: clamp(2rem, 7vw, 9rem);
-  width: min(100%, 71rem);
-  margin: clamp(2.5rem, 7vw, 6rem) auto 0;
+  grid-template-columns: minmax(0, 31rem) clamp(13.75rem, 23vw, 18.5rem);
+  justify-content: center;
+  align-items: start;
+  row-gap: clamp(2.75rem, 5vw, 4.5rem);
+  column-gap: clamp(2rem, 4vw, 3.5rem);
+  width: min(100%, 67rem);
+  margin: clamp(1.25rem, 2vw, 2rem) auto 0;
+}
+
+.about-page__hero-title {
+  position: relative;
+  z-index: 1;
+  grid-column: 1 / -1;
+  grid-row: 1;
+  justify-self: center;
+  margin: 0;
+  color: var(--ink);
+  font-size: clamp(3rem, 5vw, 5.25rem);
+  font-weight: 400;
+  letter-spacing: var(--heading-letter-spacing);
+  line-height: 0.9;
+
+  em {
+    color: var(--sand-deep);
+    font-weight: inherit;
+  }
+}
+
+.about-page__hero-bubble {
+  position: absolute;
+  z-index: 0;
+  aspect-ratio: 1.22;
+  border: 1px solid rgba(255, 255, 255, 0.62);
+  border-radius: 52% 48% 55% 45% / 45% 52% 48% 55%;
+  background:
+    radial-gradient(ellipse at 28% 22%, rgba(255, 255, 255, 0.62), transparent 28%),
+    radial-gradient(ellipse at 76% 78%, rgba(254, 223, 225, 0.16), transparent 48%),
+    linear-gradient(135deg, rgba(190, 222, 237, 0.25), rgba(246, 247, 249, 0.3) 48%, rgba(254, 223, 225, 0.2));
+  box-shadow:
+    0 1.1rem 2.4rem rgba(128, 157, 173, 0.08),
+    inset 0 0.08rem 0.1rem rgba(255, 255, 255, 0.5),
+    inset 0 -0.8rem 1.6rem rgba(160, 190, 204, 0.045);
+  animation: about-page-bubble-drift 10s ease-in-out infinite alternate;
+  backdrop-filter: blur(4px) saturate(108%);
+  -webkit-backdrop-filter: blur(4px) saturate(108%);
+  pointer-events: none;
+}
+
+.about-page__hero-bubble--top {
+  top: clamp(2.5rem, 5vw, 5rem);
+  left: clamp(-5rem, -4vw, -1.5rem);
+  width: clamp(20rem, 34vw, 30rem);
+}
+
+.about-page__hero-bubble--bottom {
+  right: clamp(-10rem, -7vw, -5.5rem);
+  bottom: clamp(-4rem, -3vw, -1.5rem);
+  width: clamp(18rem, 28vw, 28rem);
+  aspect-ratio: 1;
+  animation-delay: -4.5s;
+  animation-direction: alternate-reverse;
+}
+
+@keyframes about-page-bubble-drift {
+  from {
+    transform: translate3d(-1.5rem, -1rem, 0);
+  }
+  to {
+    transform: translate3d(1.8rem, 1.35rem, 0);
+  }
 }
 
 .about-page__hero-photo {
   position: relative;
-  width: min(100%, 28rem);
+  z-index: 1;
+  grid-column: 2;
+  grid-row: 2;
+  justify-self: end;
+  width: 100%;
   margin: 0;
   overflow: hidden;
-  border-radius: 46% 54% 51% 49% / 39% 44% 56% 61%;
-  box-shadow: 0 2rem 4rem rgba(97, 113, 122, 0.13);
+  border-radius: 0;
+  box-shadow: 0 1.5rem 3rem rgba(97, 113, 122, 0.12);
+  transform: translateX(clamp(1.25rem, 2.5vw, 2.5rem));
 
   img {
     width: 100%;
-    aspect-ratio: 0.84;
+    aspect-ratio: 2 / 3;
     object-fit: cover;
-    object-position: center;
+    object-position: center 30%;
   }
 
   figcaption {
-    position: absolute;
-    right: 1.25rem;
-    bottom: 1rem;
-    color: #fff;
-    font-size: 0.65rem;
-    letter-spacing: 0.15em;
-    text-transform: uppercase;
+    display: none;
   }
 }
 
 .about-page__hero-copy {
   position: relative;
   z-index: 2;
-  max-width: 34rem;
-  padding-top: clamp(1rem, 5vw, 6rem);
+  grid-column: 1;
+  grid-row: 2;
+  max-width: 35rem;
+  padding-top: 0;
 
   .about-page__kicker {
     margin: 0 0 1.2rem;
@@ -211,38 +289,43 @@ const certificates = [
     text-transform: uppercase;
   }
 
-  .display-title {
-    font-size: clamp(3.3rem, 6.8vw, 7.4rem);
-    line-height: 0.89;
+  > p:last-child {
+    display: none;
+  }
+}
 
-    em {
-      color: var(--sand-deep);
-      font-weight: inherit;
-    }
+.about-page__hero-copy .about-page__kicker,
+.about-page__hero-copy .display-title {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+.about-page__hero-intro {
+  color: var(--ink-soft);
+  font-size: clamp(0.88rem, 1vw, 1rem);
+  line-height: 1.95;
+  text-align: justify;
+  text-justify: inter-ideograph;
+
+  p {
+    max-width: 31rem;
+    margin: 0;
   }
 
-  > p:last-child {
-    max-width: 23rem;
-    margin: 2rem 0 0;
-    color: var(--ink-soft);
-    font-size: 0.9rem;
-    line-height: 2;
+  p + p {
+    margin-top: 1.7rem;
   }
 }
 
 .about-page__hero-orb {
-  position: absolute;
-  z-index: 0;
-  top: clamp(4.5rem, 7vw, 7rem);
-  right: -5vw;
-  width: min(51vw, 46rem);
-  aspect-ratio: 1;
-  border: 1px solid rgba(255, 255, 255, 0.72);
-  border-radius: 53% 47% 58% 42% / 43% 50% 50% 57%;
-  background:
-    radial-gradient(circle at 32% 25%, rgba(255, 255, 255, 0.72), transparent 22%),
-    linear-gradient(135deg, rgba(205, 231, 242, 0.38), rgba(246, 247, 249, 0.38) 49%, rgba(254, 223, 225, 0.32));
-  box-shadow: 0 1.25rem 4rem rgba(152, 179, 192, 0.08), inset 0 0 1px rgba(255, 255, 255, 0.92);
+  display: none;
 }
 
 .about-page__scroll {
@@ -272,18 +355,73 @@ const certificates = [
   border-top: 1px solid var(--line);
 }
 
+.about-page__skills {
+  border-top: 0;
+
+  .about-page__section-heading h2 {
+    font-size: clamp(2.25rem, 3.7vw, 2.8125rem);
+  }
+}
+
+.about-page__certificates {
+  border-top: 0;
+}
+
+.about-page__skills-marquee {
+  overflow: hidden;
+  padding: 0.75rem 0 0.9rem;
+  white-space: nowrap;
+}
+
+.about-page__skills-marquee-track {
+  display: flex;
+  width: max-content;
+  animation: about-page-skills-marquee 48s linear infinite;
+  will-change: transform;
+}
+
+.about-page__skills-marquee-word {
+  display: block;
+  flex: 0 0 auto;
+  width: clamp(22rem, 30vw, 25rem);
+  height: clamp(3.1rem, 4.8vw, 5.3rem);
+  margin-right: clamp(0.75rem, 1vw, 1.25rem);
+
+  text {
+    fill: none;
+    font-family: var(--font-heading);
+    font-size: 84px;
+    font-weight: 400;
+    letter-spacing: 3px;
+    stroke: #d2d2d2;
+    stroke-width: 1.6px;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+  }
+}
+
+@keyframes about-page-skills-marquee {
+  to {
+    transform: translateX(-50%);
+  }
+}
+
 .about-page__section-label {
   color: var(--ink-faint);
-  font-family: var(--font-serif);
-  font-size: 0.96rem;
+  font-family: var(--font-sans);
 
   .eyebrow {
-    margin-bottom: 0.7rem;
+    margin: 0;
+  }
+
+  > span {
+    display: none;
   }
 }
 
 .about-page__profile-content,
-.about-page__section-heading {
+.about-page__section-heading,
+.about-page__career-content {
   grid-column: 2;
 
   h2 {
@@ -317,6 +455,83 @@ const certificates = [
   }
 }
 
+.about-page__career-content {
+  grid-column: 2;
+  display: block;
+}
+
+.about-page__profile {
+  border-top: 0;
+  row-gap: clamp(2rem, 5vw, 4rem);
+}
+
+.about-page__career-list {
+  padding: 0;
+  margin: 0;
+  list-style: none;
+
+  > li {
+    display: grid;
+    grid-template-columns: minmax(6.75rem, 0.48fr) minmax(11.5rem, 0.97fr) minmax(13rem, 1.15fr);
+    gap: clamp(1.25rem, 2.5vw, 2.5rem);
+    padding: clamp(2rem, 3.5vw, 3rem) 0;
+    border-bottom: 1px solid var(--line);
+  }
+}
+
+.about-page__career-period {
+  color: var(--sand-deep);
+  font-size: 0.68rem;
+  letter-spacing: 0.11em;
+  line-height: 1.65;
+  text-transform: uppercase;
+
+  p,
+  span {
+    display: block;
+    margin: 0;
+  }
+
+  span {
+    margin-top: 0.5rem;
+    color: var(--sand-deep);
+  }
+}
+
+.about-page__career-detail {
+  h3 {
+    margin: 0;
+    font-family: var(--font-heading);
+    font-size: clamp(1.65rem, 2.25vw, 2.35rem);
+    font-weight: 400;
+    line-height: 1.05;
+  }
+
+  p { margin: 0; }
+
+}
+
+.about-page__career-company {
+  margin-top: 0.8rem !important;
+  color: #888888;
+  font-size: 0.92rem;
+  font-weight: 500;
+}
+
+.about-page__career-meta {
+  margin-top: 0.4rem !important;
+  color: var(--ink-faint);
+  font-size: 0.73rem;
+  letter-spacing: 0.04em;
+}
+
+.about-page__career-summary {
+  margin: 0;
+  color: var(--ink-soft);
+  font-size: 0.88rem;
+  line-height: 1.9;
+}
+
 .about-page__facts {
   grid-column: 2;
   display: grid;
@@ -344,22 +559,6 @@ const certificates = [
   }
 }
 
-.about-page__skills {
-  position: relative;
-  overflow: hidden;
-
-  &::before {
-    position: absolute;
-    top: 15%;
-    right: -10rem;
-    width: 29rem;
-    aspect-ratio: 1;
-    border-radius: 50%;
-    background: linear-gradient(135deg, rgba(209, 233, 241, 0.2), rgba(254, 223, 225, 0.18));
-    content: '';
-  }
-}
-
 .about-page__section-heading {
   position: relative;
   z-index: 1;
@@ -380,6 +579,10 @@ const certificates = [
   grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: clamp(1rem, 2vw, 1.8rem);
   margin-top: clamp(3rem, 6vw, 5rem);
+}
+
+.about-page__certificates .about-page__certificate-grid {
+  margin-top: clamp(1.5rem, 3vw, 2.5rem);
 }
 
 .about-page__skill-card,
@@ -424,64 +627,38 @@ const certificates = [
   }
 }
 
-.about-page__experience { background: #f9f9f9; }
-
-.about-page__timeline {
-  grid-column: 2;
-  margin: clamp(3rem, 6vw, 5rem) 0 0;
-  padding: 0;
-  list-style: none;
-
-  li {
-    display: grid;
-    grid-template-columns: minmax(7rem, 0.32fr) minmax(12rem, 0.7fr) minmax(12rem, 0.85fr);
-    gap: clamp(1.3rem, 3vw, 3rem);
-    padding: 2.1rem 0;
-    border-top: 1px solid var(--line);
-
-    &:last-child { border-bottom: 1px solid var(--line); }
-  }
-
-  h3,
-  p { margin: 0; }
-}
-
-.about-page__timeline-period {
-  color: var(--ink-faint);
-  font-size: 0.7rem;
-  letter-spacing: 0.08em;
-}
-
-.about-page__timeline h3 {
-  font-family: var(--font-heading);
-  font-size: clamp(1.45rem, 2vw, 2rem);
-  font-weight: 400;
-  line-height: 1.1;
-}
-
-.about-page__timeline-company {
-  margin-top: 0.45rem !important;
-  color: var(--sand-deep);
-  font-size: 0.78rem;
-}
-
-.about-page__timeline-description {
-  color: var(--ink-soft);
-  font-size: 0.8rem;
-  line-height: 1.9;
-}
-
 .about-page__certificate {
-  min-height: 13.5rem;
-  background: linear-gradient(145deg, rgba(255, 255, 255, 0.85), rgba(254, 223, 225, 0.2));
+  display: block;
+  min-height: 0;
+  padding: 0;
+  border: 0;
+  border-radius: 0;
+  background: transparent;
 
-  h3 { margin-bottom: 0.65rem; }
-
-  > p:last-child {
+  img {
+    display: block;
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    height: auto;
     margin: 0;
-    color: var(--ink-faint);
-    font-size: 0.75rem;
+    object-fit: cover;
+    object-position: center;
   }
+
+  h3 {
+    margin: 0.35rem 0 0;
+    font-family: var(--font-heading);
+    font-size: clamp(1.15rem, 1.55vw, 1.65rem);
+    font-weight: 500;
+    line-height: 1.35;
+  }
+}
+
+.about-page__certificate-meta {
+  margin: 0.65rem 0 0;
+  color: var(--ink-faint);
+  font-size: 0.78rem;
+  line-height: 1.4;
 }
 
 .about-page__footer {
@@ -498,6 +675,13 @@ const certificates = [
   text-transform: uppercase;
 }
 
+@media (prefers-reduced-motion: reduce) {
+  .about-page__hero-bubble,
+  .about-page__skills-marquee-track {
+    animation: none;
+  }
+}
+
 @media (max-width: 850px) {
   .about-page__hero {
     min-height: auto;
@@ -505,12 +689,27 @@ const certificates = [
   }
 
   .about-page__hero-layout,
-  .about-page__profile-content { grid-template-columns: 1fr; }
+  .about-page__profile-content,
+  .about-page__career-content { grid-template-columns: 1fr; }
 
   .about-page__hero-layout { max-width: 38rem; }
-  .about-page__hero-photo { width: min(75%, 25rem); }
-  .about-page__hero-copy { padding-top: 0; }
-  .about-page__hero-orb { top: 13rem; width: 66vw; }
+  .about-page__hero-photo {
+    grid-column: 1;
+    grid-row: 3;
+    width: min(100%, 19rem);
+    margin-top: 1rem;
+    transform: none;
+  }
+  .about-page__hero-copy {
+    grid-column: 1;
+    grid-row: 2;
+    padding-top: 0;
+  }
+  .about-page__hero-title {
+    grid-column: 1;
+    grid-row: 1;
+    justify-self: start;
+  }
 
   .about-page__section {
     grid-template-columns: 1fr;
@@ -518,15 +717,22 @@ const certificates = [
   }
 
   .about-page__profile-content,
+  .about-page__career-content,
   .about-page__section-heading,
   .about-page__facts,
   .about-page__skill-grid,
-  .about-page__certificate-grid,
-  .about-page__timeline { grid-column: 1; }
+  .about-page__certificate-grid { grid-column: 1; }
 
   .about-page__facts,
   .about-page__skill-grid,
   .about-page__certificate-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+
+  .about-page__career-list > li {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+
+  .about-page__career-list { grid-column: 1; }
 
   .about-page__skill-card:last-child,
   .about-page__certificate:last-child { grid-column: span 2; }
@@ -534,9 +740,7 @@ const certificates = [
 
 @media (max-width: 620px) {
   .about-page__hero { padding-top: 7.25rem; }
-  .about-page__hero-photo { width: 86%; }
-  .about-page__hero-copy .display-title { font-size: clamp(3.1rem, 15vw, 4.6rem); }
-  .about-page__hero-orb { top: 12rem; right: -11rem; width: 31rem; }
+  .about-page__hero-photo { width: min(100%, 17rem); }
 
   .about-page__facts,
   .about-page__skill-grid,
@@ -544,13 +748,6 @@ const certificates = [
 
   .about-page__skill-card:last-child,
   .about-page__certificate:last-child { grid-column: auto; }
-
-  .about-page__timeline li {
-    grid-template-columns: 1fr;
-    gap: 0.75rem;
-  }
-
-  .about-page__timeline-description { margin-top: 0.75rem !important; }
 
   .about-page__footer {
     align-items: flex-start;

@@ -1,7 +1,7 @@
 <template>
   <footer class="footer">
     <div class="footer__inner section-shell">
-      <p>© {{ new Date().getFullYear() }} Jessie Lin. Made slowly in Taipei.</p>
+      <p>© {{ new Date().getFullYear() }} Jessie Lin. All rights reserved.</p>
       <a href="#top">Back to top <span>↑</span></a>
     </div>
   </footer>

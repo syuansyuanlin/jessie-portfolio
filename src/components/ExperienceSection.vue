@@ -1,115 +1,118 @@
 <script setup lang="ts">
-import { experiences } from '@/data/portfolio'
+import graphicLogo from '@/assets/images/1-1.png'
+import graphicBusinessCard from '@/assets/images/1-2.png'
+import graphicLeaflet from '@/assets/images/1-3.png'
+
+const graphicWorks = [
+  {
+    image: graphicLogo,
+    label: '# logo',
+    alt: 'Logo design work',
+  },
+  {
+    image: graphicBusinessCard,
+    label: '# business card',
+    alt: 'Business card design work',
+  },
+  {
+    image: graphicLeaflet,
+    label: '# leaflet',
+    alt: 'Leaflet design work',
+  },
+]
 </script>
 
 <template>
-  <section id="experience" class="experience" aria-labelledby="experience-title">
+  <section id="experience" class="experience" aria-labelledby="graphic-works-title">
     <div class="experience__shell section-shell">
       <div class="experience__heading" data-reveal>
-        <p class="eyebrow">04 / Experience</p>
-        <h2 id="experience-title">A path shaped by<br /><em>curiosity.</em></h2>
+        <p class="eyebrow">04 / Graphic design</p>
+        <h2 id="graphic-works-title" class="sr-only">Graphic design works</h2>
       </div>
 
-      <ol class="experience__timeline">
-        <li v-for="experience in experiences" :key="experience.period" data-reveal>
-          <p class="experience__period">{{ experience.period }}</p>
-          <div class="experience__role">
-            <h3>{{ experience.role }}</h3>
-            <p>{{ experience.company }}</p>
+      <div class="experience__works" role="list">
+        <figure
+          v-for="work in graphicWorks"
+          :key="work.label"
+          class="experience__work"
+          role="listitem"
+          data-reveal
+        >
+          <div class="experience__image-wrap">
+            <img :src="work.image" :alt="work.alt" />
           </div>
-          <p class="experience__description">{{ experience.description }}</p>
-        </li>
-      </ol>
+          <figcaption>{{ work.label }}</figcaption>
+        </figure>
+      </div>
     </div>
   </section>
 </template>
 
-<style scoped lang="scss">
+<style lang="scss">
 .experience {
   padding: clamp(6.5rem, 12vw, 11rem) 0;
   background: var(--paper);
 }
 
-.experience__shell {
+.experience .experience__shell {
+  display: block;
+}
+
+.experience__heading {
+  margin-bottom: clamp(2.25rem, 4vw, 3.5rem);
+
+  .eyebrow {
+    margin: 0;
+  }
+}
+
+.experience__works {
   display: grid;
-  grid-template-columns: minmax(13rem, 0.72fr) minmax(0, 1.28fr);
-  gap: clamp(3rem, 10vw, 12rem);
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: clamp(1.25rem, 3vw, 2.35rem);
 }
 
-.experience__heading h2 {
-  margin: 1.25rem 0 0;
-  font-family: var(--font-heading);
-  font-size: clamp(2.4rem, 4vw, 4.8rem);
-  font-weight: 400;
-  letter-spacing: var(--heading-letter-spacing);
-  line-height: 1.03;
+.experience__work {
+  min-width: 0;
+  margin: 0;
+}
 
-  em {
-    color: var(--sand-deep);
-    font-weight: inherit;
+.experience__image-wrap {
+  aspect-ratio: 1;
+  overflow: hidden;
+  background: var(--canvas);
+
+  img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+    transition: transform 0.6s ease;
   }
 }
 
-.experience__timeline {
-  margin: 0;
-  padding: 0;
-  list-style: none;
-  border-top: 1px solid var(--line);
-
-  li {
-    display: grid;
-    grid-template-columns: minmax(6rem, 0.48fr) minmax(12rem, 0.95fr) minmax(12rem, 0.85fr);
-    gap: 1.5rem;
-    padding: 2rem 0 2.1rem;
-    border-bottom: 1px solid var(--line);
-  }
+.experience__work:hover img {
+  transform: scale(1.025);
 }
 
-.experience__period {
-  margin: 0;
-  color: var(--sand-deep);
-  font-size: 0.64rem;
-  letter-spacing: 0.06em;
-}
-
-.experience__role h3 {
-  margin: 0;
-  font-family: var(--font-heading);
-  font-size: 1.45rem;
-  font-weight: 400;
-  letter-spacing: var(--heading-letter-spacing);
-  line-height: 1.15;
-}
-
-.experience__role p,
-.experience__description {
-  margin: 0.4rem 0 0;
-  color: var(--ink-faint);
-  font-size: 0.7rem;
-  line-height: 1.75;
-}
-
-.experience__description {
-  margin: 0;
+.experience__work figcaption {
+  margin-top: 0.9rem;
   color: var(--ink-soft);
+  font-size: 0.78rem;
+  letter-spacing: 0.01em;
+  line-height: 1.4;
 }
 
-@media (max-width: 850px) {
-  .experience__shell {
-    grid-template-columns: 1fr;
-    gap: 4rem;
+@media (max-width: 720px) {
+  .experience__works {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 }
 
-@media (max-width: 620px) {
-  .experience__timeline li {
+@media (max-width: 480px) {
+  .experience__works {
     grid-template-columns: 1fr;
-    gap: 0.8rem;
-    padding: 1.65rem 0;
-  }
-
-  .experience__description {
-    max-width: 28rem;
   }
 }
 </style>

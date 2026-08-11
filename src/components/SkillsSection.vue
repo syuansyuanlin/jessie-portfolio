@@ -5,7 +5,7 @@ import { skills } from '@/data/portfolio'
 <template>
   <section class="skills" aria-labelledby="skills-title">
     <div class="skills__shell section-shell">
-      <p class="eyebrow" data-reveal>02 / Capabilities</p>
+      <p class="eyebrow" data-reveal>02 / Skills</p>
 
       <div class="skills__scene">
         <div class="skills__heading">

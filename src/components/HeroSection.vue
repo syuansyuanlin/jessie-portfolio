@@ -42,11 +42,6 @@ function scrollToAbout() {
       <span class="hero__bubble hero__bubble--blue" />
     </div>
 
-    <div class="hero__topline" data-reveal>
-      <p class="eyebrow">Portfolio / 2025</p>
-      <p class="hero__location">Based in Taipei, Taiwan</p>
-    </div>
-
     <div class="hero__composition section-shell">
       <div class="hero__copy" data-reveal data-reveal-delay="0.12">
         <p class="eyebrow">Frontend Developer · UI Designer</p>

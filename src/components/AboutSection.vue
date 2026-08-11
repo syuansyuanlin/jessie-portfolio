@@ -99,7 +99,6 @@ onBeforeUnmount(() => {
     <span ref="cursorBubble" class="about__cursor-bubble" aria-hidden="true" />
     <div class="about__label" data-reveal>
       <p class="eyebrow">01 / About me</p>
-      <span>私について</span>
     </div>
 
     <div class="about__main">
@@ -194,7 +193,7 @@ onBeforeUnmount(() => {
 
 .about__label {
   color: var(--ink-faint);
-  font-family: var(--font-serif);
+  font-family: var(--font-sans);
   font-size: 0.9rem;
 
   .eyebrow {

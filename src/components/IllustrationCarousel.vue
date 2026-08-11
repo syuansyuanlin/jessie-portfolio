@@ -4,6 +4,7 @@ import illustrationRibbon from '@/assets/images/S__189390854_0.jpg'
 import illustrationFloat from '@/assets/images/S__189390853_0.jpg'
 import illustrationTea from '@/assets/images/S__189390852_0.jpg'
 import illustrationPortrait from '@/assets/images/GuNEphFaYAA1JvO.jpg'
+import dogjuice from '@/assets/images/dogjuice.png'
 
 interface SwiperInstance {
   destroy: (deleteInstance?: boolean, cleanStyles?: boolean) => void
@@ -83,6 +84,10 @@ onBeforeUnmount(() => swiper?.destroy(true, true))
         </article>
       </div>
     </div>
+
+    <div class="illustrations__dogjuice" aria-hidden="true">
+      <img :src="dogjuice" alt="" />
+    </div>
   </section>
 </template>
 
@@ -154,6 +159,21 @@ onBeforeUnmount(() => swiper?.destroy(true, true))
   justify-content: flex-end;
 }
 
+.illustrations__dogjuice {
+  position: absolute;
+  z-index: 2;
+  bottom: clamp(3rem, 5vw, 5.5rem);
+  left: clamp(1.5rem, 11vw, 10rem);
+  width: clamp(7.5rem, 12vw, 10.5rem);
+  pointer-events: none;
+
+  img {
+    display: block;
+    width: 100%;
+    height: auto;
+  }
+}
+
 .illustrations__more {
   display: inline-flex;
   align-items: center;
@@ -213,6 +233,11 @@ onBeforeUnmount(() => swiper?.destroy(true, true))
 }
 
 @media (max-width: 639px) {
+  .illustrations__dogjuice {
+    bottom: 2rem;
+    left: 1rem;
+  }
+
   .illustration-card {
     width: clamp(14rem, 72vw, 19rem);
   }
