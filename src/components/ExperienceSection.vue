@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import { RouterLink } from 'vue-router'
 import graphicLogo from '@/assets/images/1-1.png'
 import graphicBusinessCard from '@/assets/images/1-2.png'
 import graphicLeaflet from '@/assets/images/1-3.png'
@@ -6,18 +7,19 @@ import graphicLeaflet from '@/assets/images/1-3.png'
 const graphicWorks = [
   {
     image: graphicLogo,
-    label: '# logo',
-    alt: 'Logo design work',
+    to: '/graphic-design/booking-system-dm',
+    label: '# 訂房系統DM設計',
+    alt: '訂房系統 DM 設計',
   },
   {
     image: graphicBusinessCard,
-    label: '# business card',
-    alt: 'Business card design work',
+    label: '# 品牌廣告圖',
+    alt: '品牌廣告圖設計',
   },
   {
     image: graphicLeaflet,
-    label: '# leaflet',
-    alt: 'Leaflet design work',
+    label: '＃ 產品DM',
+    alt: '產品 DM 設計',
   },
 ]
 </script>
@@ -38,10 +40,17 @@ const graphicWorks = [
           role="listitem"
           data-reveal
         >
-          <div class="experience__image-wrap">
-            <img :src="work.image" :alt="work.alt" />
-          </div>
-          <figcaption>{{ work.label }}</figcaption>
+          <component
+            :is="work.to ? RouterLink : 'div'"
+            :to="work.to"
+            class="experience__card"
+            :class="{ 'hover-target': Boolean(work.to) }"
+          >
+            <div class="experience__image-wrap">
+              <img :src="work.image" :alt="work.alt" />
+            </div>
+            <figcaption>{{ work.label }}</figcaption>
+          </component>
         </figure>
       </div>
     </div>
@@ -77,10 +86,32 @@ const graphicWorks = [
   margin: 0;
 }
 
+.experience__card {
+  display: block;
+  color: inherit;
+  text-decoration: none;
+}
+
+.experience__card:focus-visible {
+  outline: 2px solid var(--sand-deep);
+  outline-offset: 0.45rem;
+}
+
 .experience__image-wrap {
+  position: relative;
   aspect-ratio: 1;
   overflow: hidden;
   background: var(--canvas);
+
+  &::after {
+    position: absolute;
+    inset: 0;
+    background: rgba(68, 68, 68, 0.32);
+    content: '';
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.35s ease;
+  }
 
   img {
     display: block;
@@ -92,14 +123,20 @@ const graphicWorks = [
   }
 }
 
-.experience__work:hover img {
+.experience__card:hover img,
+.experience__card:focus-visible img {
   transform: scale(1.025);
 }
 
-.experience__work figcaption {
+.experience__card:hover .experience__image-wrap::after,
+.experience__card:focus-visible .experience__image-wrap::after {
+  opacity: 1;
+}
+
+.experience__card figcaption {
   margin-top: 0.9rem;
   color: var(--ink-soft);
-  font-size: 0.78rem;
+  font-size: 14px;
   letter-spacing: 0.01em;
   line-height: 1.4;
 }
