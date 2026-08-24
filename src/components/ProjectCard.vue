@@ -31,9 +31,6 @@ defineProps<{
         <a :href="project.demoUrl" target="_blank" rel="noreferrer">
           View project <Icon icon="solar:arrow-up-right-linear" />
         </a>
-        <a :href="project.githubUrl" target="_blank" rel="noreferrer">
-          GitHub <Icon icon="solar:arrow-up-right-linear" />
-        </a>
       </div>
     </div>
   </article>

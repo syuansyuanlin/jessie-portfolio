@@ -18,6 +18,7 @@ const graphicWorks = [
   },
   {
     image: graphicLeaflet,
+    to: '/graphic-design/product-dm',
     label: '＃ 產品DM',
     alt: '產品 DM 設計',
   },
@@ -43,8 +44,7 @@ const graphicWorks = [
           <component
             :is="work.to ? RouterLink : 'div'"
             :to="work.to"
-            class="experience__card"
-            :class="{ 'hover-target': Boolean(work.to) }"
+            class="experience__card hover-target"
           >
             <div class="experience__image-wrap">
               <img :src="work.image" :alt="work.alt" />

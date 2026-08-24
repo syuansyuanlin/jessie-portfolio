@@ -156,4 +156,45 @@ onBeforeUnmount(() => cleanup?.())
   pointer-events: none;
   will-change: transform, opacity;
 }
+.custom-cursor--expanded {
+  box-shadow:
+    0 0 0 2.5rem rgba(254, 223, 225, 0.28),
+    0 0 3.75rem rgba(254, 223, 225, 0.46);
+}
+/* Keep link/card hover feedback as the original compact pink point. */
+.custom-cursor {
+  width: 10px !important;
+  height: 10px !important;
+  background: #fedfe1 !important;
+  border-radius: 50% !important;
+  box-shadow: 0 0 18px 6px rgba(254, 223, 225, 0.32) !important;
+}
+
+.custom-cursor::before,
+.custom-cursor::after {
+  content: none !important;
+  display: none !important;
+}
+.custom-cursor {
+  width: 10px !important;
+  height: 10px !important;
+  background: #fedfe1 !important;
+  border-radius: 50% !important;
+  box-shadow: 0 0 18px 6px rgba(254, 223, 225, 0.32) !important;
+}
+
+.custom-cursor::before,
+.custom-cursor::after {
+  content: none !important;
+  display: none !important;
+}
+</style>
+
+<style>
+/* Keep the original compact hover feedback on every interactive target. */
+.custom-cursor.custom-cursor--expanded {
+  box-shadow:
+    0 0 0 0.25rem rgba(254, 223, 225, 0.12),
+    0 0 0.7rem rgba(254, 223, 225, 0.2) !important;
+}
 </style>

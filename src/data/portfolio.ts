@@ -1,4 +1,6 @@
 import type { Experience, Project, SkillGroup } from '@/types/portfolio'
+import portfolioCoverImage from '@/assets/images/xxx.png'
+import luminaCoverImage from '@/assets/images/lumina.png'
 
 export const navigation = [
   { label: 'About', target: '#about' },
@@ -36,25 +38,23 @@ export const projects: Project[] = [
     id: 'mori-journal',
     number: '01',
     title: 'Portfolio Website Design',
-    category: 'Editorial website · 2026',
+    category: 'website · 2026',
     description: '以「日系雜誌風格」為靈感，透過留白、圓形構圖與柔和色彩，營造輕盈、靜謐的氛圍。 在簡單中感受到細節，在距離中感受到溫度。',
-    image: 'https://images.unsplash.com/photo-1497366811353-6870744d04b2?auto=format&fit=crop&w=1800&q=90',
-    imageAlt: '柔和光線下的極簡室內空間',
-    technologies: ['Vue 3', 'GSAP', 'Contentful'],
+    image: portfolioCoverImage,
+    imageAlt: 'Jessie 個人作品集首頁設計',
+    technologies: ['Vue3', 'SCSS'],
     demoUrl: 'https://example.com',
-    githubUrl: 'https://github.com',
   },
   {
     id: 'nami-stay',
     number: '02',
-    title: 'Nami Stay',
-    category: 'Booking experience · 2024',
+    title: 'Website Design',
+    category: 'website · 2026',
     description: '讓住宿預訂回到直覺與感受；從探索到確認，每一步都安靜而清晰。',
-    image: 'https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?auto=format&fit=crop&w=1800&q=90',
-    imageAlt: '簡約住宅客廳與大型窗景',
-    technologies: ['Vue 3', 'Pinia', 'Figma'],
+    image: luminaCoverImage,
+    imageAlt: 'Lumina 網站設計',
+    technologies: ['WordPress', 'CSS', 'JavaScript'],
     demoUrl: 'https://example.com',
-    githubUrl: 'https://github.com',
   },
   {
     id: 'kanso-shop',
@@ -66,7 +66,6 @@ export const projects: Project[] = [
     imageAlt: '明亮的設計工作室',
     technologies: ['Vue 3', 'SCSS', 'Shopify'],
     demoUrl: 'https://example.com',
-    githubUrl: 'https://github.com',
   },
 ]
 

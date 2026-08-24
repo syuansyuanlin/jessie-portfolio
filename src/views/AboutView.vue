@@ -134,7 +134,7 @@ const certificateContent: Record<string, { image: string; title: string; detail:
 
     <section class="about-page__section about-page__certificates section-shell" aria-label="Credentials">
       <div class="about-page__section-label" data-reveal>
-        <p class="eyebrow">Credentials / 04</p>
+        <p class="eyebrow">Certificates / 03</p>
         <span>相關證照</span>
       </div>
 
@@ -193,7 +193,7 @@ const certificateContent: Record<string, { image: string; title: string; detail:
   justify-self: center;
   margin: 0;
   color: var(--ink);
-  font-size: clamp(3rem, 5vw, 5.25rem);
+  font-size: clamp(2rem, 5vw, 2.4rem);
   font-weight: 400;
   letter-spacing: var(--heading-letter-spacing);
   line-height: 0.9;

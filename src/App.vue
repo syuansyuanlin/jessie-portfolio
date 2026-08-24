@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { onBeforeUnmount, onMounted, ref } from 'vue'
+import { useRouter } from 'vue-router'
 import Lenis from 'lenis'
 import { gsap } from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
@@ -14,8 +15,22 @@ let lenis: Lenis | undefined
 const syncScrollTrigger = () => ScrollTrigger.update()
 const appContent = ref<HTMLElement | null>(null)
 const isLoading = ref(true)
+const routerInstance = useRouter()
+const brandAdvertisingCardSelector =
+  '#experience .experience__works > figure.experience__work:nth-of-type(2)'
+
+const openBrandAdvertising = (event: MouseEvent) => {
+  const target = event.target
+  if (!(target instanceof Element) || !target.closest(brandAdvertisingCardSelector)) return
+
+  event.preventDefault()
+  event.stopPropagation()
+  routerInstance.push({ name: 'brand-advertising' })
+}
 
 onMounted(() => {
+  document.addEventListener('click', openBrandAdvertising, true)
+
   if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return
 
   lenis = new Lenis({
@@ -36,6 +51,7 @@ onMounted(() => {
 })
 
 onBeforeUnmount(() => {
+  document.removeEventListener('click', openBrandAdvertising, true)
   cancelAnimationFrame(frameId)
   lenis?.off('scroll', syncScrollTrigger)
   lenis?.destroy()
@@ -64,5 +80,11 @@ const completeLoading = () => {
 .app__content--loading {
   opacity: 0;
   transform: translateY(1.875rem);
+}
+
+:global(#experience .experience__works > figure.experience__work:nth-of-type(2)),
+:global(#experience .experience__works > figure.experience__work:nth-of-type(2) *) {
+  cursor: pointer;
+  pointer-events: auto !important;
 }
 </style>

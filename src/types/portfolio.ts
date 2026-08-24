@@ -16,7 +16,6 @@ export interface Project {
   imageAlt: string
   technologies: string[]
   demoUrl: string
-  githubUrl: string
 }
 
 export interface Experience {

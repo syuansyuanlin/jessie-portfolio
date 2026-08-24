@@ -9,12 +9,6 @@ const contacts = [
     icon: "solar:letter-linear",
   },
   {
-    label: "GitHub",
-    value: "@jessielin",
-    href: "https://github.com",
-    icon: "mdi:github",
-  },
-  {
     label: "LinkedIn",
     value: "Jessie Lin",
     href: "https://linkedin.com",
@@ -89,7 +83,7 @@ const contacts = [
 
 .contact__links {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(2, 1fr);
   gap: 1rem;
   margin-top: clamp(4rem, 9vw, 8rem);
 
