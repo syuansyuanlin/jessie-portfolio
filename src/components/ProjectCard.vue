@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { Icon } from '@iconify/vue'
+import { RouterLink } from 'vue-router'
 import type { Project } from '@/types/portfolio'
 
 defineProps<{
@@ -28,7 +29,10 @@ defineProps<{
         <li v-for="technology in project.technologies" :key="technology">{{ technology }}</li>
       </ul>
       <div class="project-card__actions">
-        <a :href="project.demoUrl" target="_blank" rel="noreferrer">
+        <RouterLink v-if="project.demoUrl.startsWith('/')" :to="project.demoUrl">
+          View project <Icon icon="solar:arrow-up-right-linear" />
+        </RouterLink>
+        <a v-else :href="project.demoUrl" target="_blank" rel="noreferrer">
           View project <Icon icon="solar:arrow-up-right-linear" />
         </a>
       </div>

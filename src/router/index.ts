@@ -4,6 +4,8 @@ import AboutView from '@/views/AboutView.vue'
 import GraphicWorkDetailView from '@/views/GraphicWorkDetailView.vue'
 import BrandAdvertisingView from '@/views/BrandAdvertisingView.vue'
 import ProductDmView from '@/views/ProductDmView.vue'
+import PortfolioWebsiteView from '@/views/PortfolioWebsiteView.vue'
+import LuminaWebsiteView from '@/views/LuminaWebsiteView.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -37,6 +39,16 @@ const router = createRouter({
       path: '/graphic-design/product-dm',
       name: 'product-dm',
       component: ProductDmView,
+    },
+    {
+      path: '/works/portfolio-website-design',
+      name: 'portfolio-website-design',
+      component: PortfolioWebsiteView,
+    },
+    {
+      path: '/works/lumina-website-design',
+      name: 'lumina-website-design',
+      component: LuminaWebsiteView,
     },
   ],
 })

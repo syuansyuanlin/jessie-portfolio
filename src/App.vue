@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { onBeforeUnmount, onMounted, ref } from 'vue'
+import { nextTick, onBeforeUnmount, onMounted, ref } from 'vue'
 import { useRouter } from 'vue-router'
 import Lenis from 'lenis'
 import { gsap } from 'gsap'
@@ -12,6 +12,7 @@ gsap.registerPlugin(ScrollTrigger)
 
 let frameId = 0
 let lenis: Lenis | undefined
+let removeRouteGuard: (() => void) | undefined
 const syncScrollTrigger = () => ScrollTrigger.update()
 const appContent = ref<HTMLElement | null>(null)
 const isLoading = ref(true)
@@ -30,6 +31,21 @@ const openBrandAdvertising = (event: MouseEvent) => {
 
 onMounted(() => {
   document.addEventListener('click', openBrandAdvertising, true)
+
+  removeRouteGuard = routerInstance.afterEach(async (to) => {
+    if (to.hash) return
+
+    await nextTick()
+    requestAnimationFrame(() => {
+      if (lenis) {
+        lenis.scrollTo(0, { immediate: true, force: true })
+      } else {
+        window.scrollTo({ top: 0, left: 0, behavior: 'auto' })
+      }
+
+      requestAnimationFrame(() => ScrollTrigger.refresh())
+    })
+  })
 
   if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return
 
@@ -52,6 +68,7 @@ onMounted(() => {
 
 onBeforeUnmount(() => {
   document.removeEventListener('click', openBrandAdvertising, true)
+  removeRouteGuard?.()
   cancelAnimationFrame(frameId)
   lenis?.off('scroll', syncScrollTrigger)
   lenis?.destroy()
