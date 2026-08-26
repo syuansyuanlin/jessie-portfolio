@@ -188,6 +188,13 @@ onBeforeUnmount(() => cleanup?.())
   content: none !important;
   display: none !important;
 }
+
+@media (max-width: 620px), (hover: none), (pointer: coarse) {
+  .custom-cursor,
+  .custom-cursor__halo {
+    display: none !important;
+  }
+}
 </style>
 
 <style>

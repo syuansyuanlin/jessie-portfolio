@@ -33,9 +33,47 @@ onMounted(() => {
   document.addEventListener('click', openBrandAdvertising, true)
 
   removeRouteGuard = routerInstance.afterEach(async (to) => {
-    if (to.hash) return
-
     await nextTick()
+
+    if (to.hash) {
+      let remainingAttempts = 30
+
+      const scrollToHash = () => {
+        if (routerInstance.currentRoute.value.fullPath !== to.fullPath) return
+
+        const target = document.querySelector<HTMLElement>(to.hash)
+        if (!target) {
+          remainingAttempts -= 1
+          if (remainingAttempts > 0) window.setTimeout(scrollToHash, 16)
+          return
+        }
+
+        let stabilizationFrames = 3
+        const stabilizePosition = () => {
+          if (routerInstance.currentRoute.value.fullPath !== to.fullPath) return
+
+          if (lenis) {
+            lenis.resize()
+            lenis.scrollTo(target, { immediate: true, force: true })
+          } else {
+            target.scrollIntoView({ behavior: 'auto', block: 'start' })
+          }
+
+          stabilizationFrames -= 1
+          if (stabilizationFrames > 0) {
+            window.setTimeout(stabilizePosition, 16)
+          } else {
+            ScrollTrigger.refresh()
+          }
+        }
+
+        stabilizePosition()
+      }
+
+      scrollToHash()
+      return
+    }
+
     requestAnimationFrame(() => {
       if (lenis) {
         lenis.scrollTo(0, { immediate: true, force: true })

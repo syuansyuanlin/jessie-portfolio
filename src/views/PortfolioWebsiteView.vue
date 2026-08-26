@@ -17,7 +17,7 @@ const pages = [
 <template>
   <main class="portfolio-detail">
     <section class="portfolio-detail__intro section-shell">
-      <p class="portfolio-detail__eyebrow">SELECTED WORKS / 03</p>
+      <p class="portfolio-detail__eyebrow">SELECTED WORKS</p>
 
       <div class="portfolio-detail__heading">
         <h1>Portfolio Website<br /><em>Design.</em></h1>
@@ -87,6 +87,10 @@ const pages = [
   text-transform: uppercase;
 }
 
+.portfolio-detail__eyebrow {
+  margin: 0;
+}
+
 .portfolio-detail__intro {
   padding-top: clamp(10rem, 14vw, 13rem);
   padding-bottom: clamp(6rem, 10vw, 9rem);
@@ -94,14 +98,14 @@ const pages = [
 
 .portfolio-detail__heading {
   width: min(100%, 43rem);
-  margin: clamp(2.7rem, 5vw, 5rem) auto clamp(4rem, 7vw, 7rem);
+  margin: -1.15rem auto clamp(4rem, 7vw, 7rem);
 }
 
 .portfolio-detail__heading h1 {
   margin: 0;
   color: var(--ink);
   font-family: var(--font-heading);
-  font-size: clamp(2.8rem, 5vw, 5.2rem);
+  font-size: clamp(2.66rem, 4vw, 5.2rem);
   font-weight: 400;
   letter-spacing: 0.03em;
   line-height: 0.88;
@@ -198,6 +202,11 @@ const pages = [
 @media (max-width: 760px) {
   .portfolio-detail__intro {
     padding-top: 9rem;
+  }
+
+  .portfolio-detail__heading {
+    width: 100%;
+    margin: 2rem 0 4rem;
   }
 
   .portfolio-detail__gallery,

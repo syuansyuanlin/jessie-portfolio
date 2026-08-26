@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import { nextTick, onBeforeUnmount, onMounted, ref } from 'vue'
 import aboutPhoto from '@/assets/images/S__190988291.jpg'
 import azureAiCertificate from '@/assets/images/azureai.png'
 import aiCertificate from '@/assets/images/ai.png'
@@ -49,6 +50,44 @@ const certificateContent: Record<string, { image: string; title: string; detail:
     detail: 'BIPBD Power BI Desktop · 2024',
   },
 }
+
+type CertificateContent = (typeof certificateContent)[string]
+
+const activeCertificate = ref<CertificateContent | null>(null)
+const certificateCloseButton = ref<HTMLButtonElement | null>(null)
+let previousBodyOverflow = ''
+let previousFocus: HTMLElement | null = null
+
+const openCertificate = async (certificate: CertificateContent) => {
+  previousFocus = document.activeElement instanceof HTMLElement ? document.activeElement : null
+  previousBodyOverflow = document.body.style.overflow
+  document.body.style.overflow = 'hidden'
+  activeCertificate.value = certificate
+
+  await nextTick()
+  certificateCloseButton.value?.focus()
+}
+
+const closeCertificate = async () => {
+  if (!activeCertificate.value) return
+
+  activeCertificate.value = null
+  document.body.style.overflow = previousBodyOverflow
+
+  await nextTick()
+  previousFocus?.focus()
+}
+
+const handleCertificateKeydown = (event: KeyboardEvent) => {
+  if (event.key === 'Escape') closeCertificate()
+}
+
+onMounted(() => window.addEventListener('keydown', handleCertificateKeydown))
+
+onBeforeUnmount(() => {
+  window.removeEventListener('keydown', handleCertificateKeydown)
+  document.body.style.overflow = previousBodyOverflow
+})
 </script>
 
 <template>
@@ -139,11 +178,19 @@ const certificateContent: Record<string, { image: string; title: string; detail:
       </div>
 
       <div class="about-page__certificate-grid">
-        <article v-for="certificate in certificates" :key="certificate.number" class="about-page__certificate" data-reveal>
+        <button
+          v-for="certificate in certificates"
+          :key="certificate.number"
+          type="button"
+          class="about-page__certificate"
+          :aria-label="`放大查看 ${certificateContent[certificate.number].title} 證照`"
+          data-reveal
+          @click="openCertificate(certificateContent[certificate.number])"
+        >
           <img :src="certificateContent[certificate.number].image" :alt="certificateContent[certificate.number].title" />
           <p class="about-page__certificate-meta">{{ certificateContent[certificate.number].detail }}</p>
           <h3>{{ certificateContent[certificate.number].title }}</h3>
-        </article>
+        </button>
       </div>
     </section>
 
@@ -151,6 +198,38 @@ const certificateContent: Record<string, { image: string; title: string; detail:
       <RouterLink to="/" class="text-link">← Back to home</RouterLink>
       <span>Jessie Lin / About</span>
     </footer>
+
+    <Teleport to="body">
+      <Transition name="certificate-modal">
+        <div
+          v-if="activeCertificate"
+          class="about-page__certificate-modal"
+          role="dialog"
+          aria-modal="true"
+          :aria-label="`${activeCertificate.title} 證照預覽`"
+          @click.self="closeCertificate"
+        >
+          <div class="about-page__certificate-dialog">
+            <button
+              ref="certificateCloseButton"
+              type="button"
+              class="about-page__certificate-close"
+              aria-label="關閉證照預覽"
+              @click="closeCertificate"
+            >
+              ×
+            </button>
+
+            <img :src="activeCertificate.image" :alt="activeCertificate.title" />
+
+            <div class="about-page__certificate-caption">
+              <p>{{ activeCertificate.detail }}</p>
+              <h2>{{ activeCertificate.title }}</h2>
+            </div>
+          </div>
+        </div>
+      </Transition>
+    </Teleport>
   </main>
 </template>
 
@@ -629,11 +708,20 @@ const certificateContent: Record<string, { image: string; title: string; detail:
 
 .about-page__certificate {
   display: block;
+  width: 100%;
   min-height: 0;
   padding: 0;
   border: 0;
   border-radius: 0;
   background: transparent;
+  color: inherit;
+  cursor: pointer;
+  text-align: left;
+
+  &:focus-visible {
+    outline: 2px solid var(--sand-deep);
+    outline-offset: 0.55rem;
+  }
 
   img {
     display: block;
@@ -659,6 +747,100 @@ const certificateContent: Record<string, { image: string; title: string; detail:
   color: var(--ink-faint);
   font-size: 0.78rem;
   line-height: 1.4;
+}
+
+.about-page__certificate-modal {
+  position: fixed;
+  z-index: 12000;
+  inset: 0;
+  display: grid;
+  padding: clamp(1rem, 4vw, 3rem);
+  place-items: center;
+  background: rgba(35, 37, 40, 0.72);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+}
+
+.about-page__certificate-dialog {
+  position: relative;
+  width: min(100%, 68rem);
+  max-height: calc(100svh - clamp(2rem, 8vw, 6rem));
+  overflow: auto;
+  padding: clamp(1rem, 2vw, 1.5rem);
+  border: 1px solid rgba(255, 255, 255, 0.72);
+  background: var(--paper);
+  box-shadow: 0 2rem 5rem rgba(18, 22, 28, 0.28);
+
+  > img {
+    display: block;
+    width: 100%;
+    max-height: calc(100svh - 12rem);
+    object-fit: contain;
+    background: #ffffff;
+  }
+}
+
+.about-page__certificate-close {
+  position: absolute;
+  z-index: 1;
+  top: 0.75rem;
+  right: 0.75rem;
+  display: grid;
+  width: 2.6rem;
+  height: 2.6rem;
+  padding: 0 0 0.18rem;
+  place-items: center;
+  border: 1px solid rgba(68, 68, 68, 0.28);
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.9);
+  color: var(--ink);
+  cursor: pointer;
+  font-family: var(--font-sans);
+  font-size: 1.65rem;
+  line-height: 1;
+}
+
+.about-page__certificate-caption {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 1.5rem;
+  padding: 1rem 0.25rem 0.1rem;
+
+  p,
+  h2 {
+    margin: 0;
+  }
+
+  p {
+    color: var(--ink-faint);
+    font-size: 0.74rem;
+  }
+
+  h2 {
+    font-family: var(--font-heading);
+    font-size: clamp(1.25rem, 2vw, 1.8rem);
+    font-weight: 500;
+  }
+}
+
+.certificate-modal-enter-active,
+.certificate-modal-leave-active {
+  transition: opacity 220ms ease;
+
+  .about-page__certificate-dialog {
+    transition: opacity 220ms ease, transform 280ms cubic-bezier(0.22, 1, 0.36, 1);
+  }
+}
+
+.certificate-modal-enter-from,
+.certificate-modal-leave-to {
+  opacity: 0;
+
+  .about-page__certificate-dialog {
+    opacity: 0;
+    transform: translateY(1rem) scale(0.97);
+  }
 }
 
 .about-page__footer {
@@ -748,6 +930,20 @@ const certificateContent: Record<string, { image: string; title: string; detail:
 
   .about-page__skill-card:last-child,
   .about-page__certificate:last-child { grid-column: auto; }
+
+  .about-page__certificate-modal {
+    padding: 0.75rem;
+  }
+
+  .about-page__certificate-dialog {
+    padding: 0.75rem;
+  }
+
+  .about-page__certificate-caption {
+    align-items: flex-start;
+    flex-direction: column-reverse;
+    gap: 0.35rem;
+  }
 
   .about-page__footer {
     align-items: flex-start;

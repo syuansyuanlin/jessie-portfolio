@@ -40,11 +40,13 @@ onMounted(() => {
     if (!lastPointer) return
 
     const bounds = section.getBoundingClientRect()
+    const bubbleRadius = bubble.offsetWidth / 2
+    const verticalSafeInset = bubbleRadius + 12
     const isInsideAbout =
       lastPointer.x >= bounds.left &&
       lastPointer.x <= bounds.right &&
-      lastPointer.y >= bounds.top &&
-      lastPointer.y <= bounds.bottom
+      lastPointer.y >= bounds.top + verticalSafeInset &&
+      lastPointer.y <= bounds.bottom - verticalSafeInset
 
     if (!isInsideAbout) {
       setVisibility(false)
@@ -320,12 +322,22 @@ onBeforeUnmount(() => {
     grid-row: auto;
   }
 
-  .about__image { order: 2; }
+  .about__label {
+    order: 0;
+  }
 
   .about__image {
-    width: min(76%, 48rem);
-    margin: 0 0 0 auto;
-    justify-self: auto;
+    order: 1;
+  }
+
+  .about__main {
+    order: 2;
+  }
+
+  .about__image {
+    width: min(48%, 12rem);
+    margin: 0 auto;
+    justify-self: center;
     transform: none;
   }
 
@@ -343,14 +355,20 @@ onBeforeUnmount(() => {
   .about__story {
     max-width: 30rem;
     width: 100%;
-    margin-top: 0;
+    margin-top: 2rem;
     padding-top: 0;
     font-size: 0.8rem;
   }
 
+  .about__more {
+    display: flex;
+    width: max-content;
+    margin: 1.8rem 0 0 auto;
+  }
+
   .about__image {
-    width: 92%;
-    margin-top: 3.5rem;
+    width: min(64vw, 14rem);
+    margin: 0 auto;
   }
 }
 </style>

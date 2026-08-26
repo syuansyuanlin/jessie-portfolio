@@ -331,11 +331,26 @@ import { skills } from '@/data/portfolio'
 
   .skills__list {
     grid-template-columns: 1fr;
-    gap: 1.25rem;
+    justify-items: center;
+    gap: 3.25rem;
+  }
+
+  .skill-group {
+    width: min(72vw, 17rem);
+    aspect-ratio: 1;
   }
 
   .skill-group__float {
-    min-height: 13.5rem;
+    width: 100%;
+    height: 100%;
+    min-height: 0;
+    gap: 0.55rem;
+    padding: 1.65rem;
+  }
+
+  .skill-group__float::before {
+    inset: -0.75rem;
+    border-radius: 50% !important;
   }
 }
 

@@ -5,7 +5,7 @@ import coverImage from '@/assets/images/DM.png'
 <template>
   <main class="graphic-work-detail">
     <section class="graphic-work-detail__intro section-shell">
-      <p class="eyebrow" data-reveal>GRAPHIC DESIGN / 04</p>
+      <p class="eyebrow" data-reveal>GRAPHIC DESIGN</p>
 
       <div class="graphic-work-detail__heading" data-reveal>
         <h1>Graphic design</h1>
@@ -47,7 +47,10 @@ import coverImage from '@/assets/images/DM.png'
       </div>
     </section>
     <footer class="graphic-work-detail__footer section-shell">
-      <RouterLink class="graphic-work-detail__back" to="/">
+      <RouterLink
+        class="graphic-work-detail__back"
+        :to="{ name: 'home', hash: '#experience' }"
+      >
         ← Back to home
       </RouterLink>
       <span class="graphic-work-detail__footer-mark">Jessie Lin / Graphic design</span>

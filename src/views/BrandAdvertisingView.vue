@@ -29,7 +29,7 @@ const works = [
 <template>
   <main class="brand-advertising">
     <section class="brand-advertising__intro section-shell">
-      <p class="brand-advertising__eyebrow">GRAPHIC DESIGN / 04</p>
+      <p class="brand-advertising__eyebrow">GRAPHIC DESIGN</p>
 
       <div class="brand-advertising__heading">
         <h1>Brand advertising<br /><em>graphics.</em></h1>
@@ -73,7 +73,12 @@ const works = [
     </section>
 
     <footer class="brand-advertising__footer section-shell">
-      <RouterLink to="/" class="brand-advertising__back">← Back to home</RouterLink>
+      <RouterLink
+        :to="{ name: 'home', hash: '#experience' }"
+        class="brand-advertising__back"
+      >
+        ← Back to home
+      </RouterLink>
       <span>JESSIE LIN / GRAPHIC DESIGN</span>
     </footer>
   </main>
@@ -81,14 +86,11 @@ const works = [
 
 <style scoped>
 .brand-advertising {
-  padding: clamp(4rem, 9vw, 8rem) 0 clamp(3rem, 6vw, 5rem);
+  padding: 0 0 clamp(3rem, 6vw, 5rem);
 }
 
 .brand-advertising__intro {
-  display: grid;
-  grid-template-columns: minmax(11rem, 0.58fr) minmax(0, 1.42fr);
-  gap: clamp(2rem, 5vw, 7rem);
-  align-items: start;
+  padding-top: clamp(10rem, 14vw, 13rem);
   margin-bottom: clamp(3.5rem, 7vw, 6.75rem);
 }
 
@@ -96,19 +98,30 @@ const works = [
 .brand-advertising__footer {
   color: #888;
   font-family: Inter, 'Noto Sans TC', sans-serif;
-  font-size: 0.7rem;
+  font-size: 0.68rem;
   font-weight: 500;
-  letter-spacing: 0.15em;
+  letter-spacing: 0.16em;
+  line-height: 1.4;
+  text-transform: uppercase;
+}
+
+.brand-advertising__eyebrow {
+  margin: 0;
+}
+
+.brand-advertising__heading {
+  width: min(100%, 43rem);
+  margin: -1.15rem auto 0;
 }
 
 .brand-advertising__heading h1 {
   margin: 0;
   color: #444;
   font-family: 'Cormorant Garamond', 'Noto Serif TC', serif;
-  font-size: clamp(3.1rem, 6.3vw, 4rem);
+  font-size: clamp(2.66rem, 4vw, 5.2rem);
   font-weight: 400;
-  letter-spacing: 0.015em;
-  line-height: 0.86;
+  letter-spacing: 0.03em;
+  line-height: 0.88;
 }
 
 .brand-advertising__heading h1 em {
@@ -217,14 +230,14 @@ const works = [
 }
 
 @media (max-width: 700px) {
-  .brand-advertising {
-    padding-top: 3rem;
+  .brand-advertising__intro {
+    padding-top: 9rem;
+    margin-bottom: 3.25rem;
   }
 
-  .brand-advertising__intro {
-    grid-template-columns: 1fr;
-    gap: 2rem;
-    margin-bottom: 3.25rem;
+  .brand-advertising__heading {
+    width: 100%;
+    margin: 2rem 0 0;
   }
 
   .brand-advertising__overview-grid {

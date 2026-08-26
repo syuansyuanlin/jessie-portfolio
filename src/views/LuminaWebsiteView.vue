@@ -17,10 +17,10 @@ const pages = [
 <template>
   <main class="lumina-detail">
     <section class="lumina-detail__intro section-shell">
-      <p class="lumina-detail__eyebrow">SELECTED WORKS / 03</p>
+      <p class="lumina-detail__eyebrow">SELECTED WORKS</p>
 
       <div class="lumina-detail__heading">
-        <h1>Lumina Website<br /><em>Design.</em></h1>
+        <h1>Website <em>Design.</em></h1>
         <p>旅宿形象網站設計</p>
       </div>
 
@@ -36,10 +36,8 @@ const pages = [
 
       <div class="lumina-detail__overview-grid">
         <p>
-          以大地色系與溫潤木質調為基底，透過大面積留白、柔和圓角與細緻的圖片編排，營造如度假般放鬆且安靜的旅宿氛圍。
-          <br />
-          <br />
-          網站整合首頁形象、最新消息、品牌介紹、房型、設施服務、周邊景點、交通資訊與聯絡表單，讓使用者能沿著清楚的閱讀動線認識旅宿特色並取得入住所需資訊。
+          以溫潤的米白、淺灰、奶茶色及淺木色為底色，搭配黑灰色系文字與線條，營造出寧靜、沉穩且放鬆的氛圍。
+          搭配雜誌風的錯位排版，打破傳統飯店網站死板的圖文網格，提升品牌的溢價感。
         </p>
 
         <dl>
@@ -87,6 +85,10 @@ const pages = [
   text-transform: uppercase;
 }
 
+.lumina-detail__eyebrow {
+  margin: 0;
+}
+
 .lumina-detail__intro {
   padding-top: clamp(10rem, 14vw, 13rem);
   padding-bottom: clamp(6rem, 10vw, 9rem);
@@ -94,14 +96,14 @@ const pages = [
 
 .lumina-detail__heading {
   width: min(100%, 43rem);
-  margin: clamp(2.7rem, 5vw, 5rem) auto clamp(4rem, 7vw, 7rem);
+  margin: -1.15rem auto clamp(4rem, 7vw, 7rem);
 }
 
 .lumina-detail__heading h1 {
   margin: 0;
   color: var(--ink);
   font-family: var(--font-heading);
-  font-size: clamp(2.8rem, 5vw, 5.2rem);
+  font-size: clamp(2.66rem, 4vw, 5.2rem);
   font-weight: 400;
   letter-spacing: 0.03em;
   line-height: 0.88;
@@ -198,6 +200,11 @@ const pages = [
 @media (max-width: 760px) {
   .lumina-detail__intro {
     padding-top: 9rem;
+  }
+
+  .lumina-detail__heading {
+    width: 100%;
+    margin: 2rem 0 4rem;
   }
 
   .lumina-detail__gallery,

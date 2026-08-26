@@ -10,7 +10,7 @@ import LuminaWebsiteView from '@/views/LuminaWebsiteView.vue'
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   scrollBehavior: (to) => {
-    if (to.hash) return { el: to.hash, behavior: 'smooth' }
+    if (to.hash) return { el: to.hash, behavior: 'auto' }
 
     return { top: 0 }
   },

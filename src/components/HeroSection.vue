@@ -419,6 +419,17 @@ function scrollToAbout() {
     transform: none;
   }
 
+  .hero__bubble--pink {
+    top: 34%;
+    left: 8%;
+    width: min(28rem, 112vw);
+    height: min(28rem, 112vw);
+  }
+
+  .hero__bubble--blue {
+    display: none;
+  }
+
   .hero__intro {
     max-width: 20rem;
     margin-top: 1.4rem;

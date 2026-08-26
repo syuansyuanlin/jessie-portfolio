@@ -29,7 +29,7 @@ const graphicWorks = [
   <section id="experience" class="experience" aria-labelledby="graphic-works-title">
     <div class="experience__shell section-shell">
       <div class="experience__heading" data-reveal>
-        <p class="eyebrow">04 / Graphic design</p>
+        <p class="eyebrow">05 / Graphic design</p>
         <h2 id="graphic-works-title" class="sr-only">Graphic design works</h2>
       </div>
 

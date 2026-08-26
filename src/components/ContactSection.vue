@@ -9,10 +9,10 @@ const contacts = [
     icon: "solar:letter-linear",
   },
   {
-    label: "LinkedIn",
-    value: "Jessie Lin",
-    href: "https://linkedin.com",
-    icon: "mdi:linkedin",
+    label: "104 Resume",
+    value: "104 個人履歷",
+    href: "",
+    icon: "solar:document-text-linear",
   },
 ];
 </script>
@@ -20,7 +20,7 @@ const contacts = [
 <template>
   <section id="contact" class="contact" aria-labelledby="contact-title">
     <div class="contact__shell section-shell">
-      <p class="eyebrow" data-reveal>05 / Contact</p>
+      <p class="eyebrow" data-reveal>06 / Contact</p>
       <h2 id="contact-title" class="contact__title" data-reveal>
         Let’s make<br />something <em>meaningful.</em>
       </h2>
@@ -29,20 +29,27 @@ const contacts = [
       </p>
 
       <div class="contact__links" data-reveal>
-        <a
+        <component
           v-for="contact in contacts"
           :key="contact.label"
-          :href="contact.href"
-          target="_blank"
-          rel="noreferrer"
+          :is="contact.href ? 'a' : 'div'"
+          class="contact__link"
+          :class="{ 'contact__link--disabled': !contact.href }"
+          :href="contact.href || undefined"
+          :target="contact.href ? '_blank' : undefined"
+          :rel="contact.href ? 'noreferrer' : undefined"
         >
           <span class="contact__icon"><Icon :icon="contact.icon" /></span>
           <span>
             <small>{{ contact.label }}</small>
             <strong>{{ contact.value }}</strong>
           </span>
-          <Icon class="contact__arrow" icon="solar:arrow-up-right-linear" />
-        </a>
+          <Icon
+            v-if="contact.href"
+            class="contact__arrow"
+            icon="solar:arrow-up-right-linear"
+          />
+        </component>
       </div>
     </div>
   </section>
@@ -87,7 +94,7 @@ const contacts = [
   gap: 1rem;
   margin-top: clamp(4rem, 9vw, 8rem);
 
-  a {
+  .contact__link {
     display: flex;
     align-items: center;
     gap: 0.75rem;
@@ -95,9 +102,13 @@ const contacts = [
     border-top: 1px solid rgba(34, 34, 34, 0.28);
     transition: color 300ms ease;
 
-    &:hover {
+    &:not(.contact__link--disabled):hover {
       color: var(--sand-deep);
     }
+  }
+
+  .contact__link--disabled {
+    cursor: default;
   }
 
   span:not(.contact__icon) {
