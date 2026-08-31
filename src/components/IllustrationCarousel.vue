@@ -1,44 +1,58 @@
 <script setup lang="ts">
-import { nextTick, onBeforeUnmount, onMounted, ref } from 'vue'
-import illustrationRibbon from '@/assets/images/S__189390854_0.jpg'
-import illustrationFloat from '@/assets/images/S__189390853_0.jpg'
-import illustrationTea from '@/assets/images/S__189390852_0.jpg'
-import illustrationPortrait from '@/assets/images/GuNEphFaYAA1JvO.jpg'
-import dogjuice from '@/assets/images/dogjuice.png'
+import { nextTick, onBeforeUnmount, onMounted, ref } from "vue";
+import illustrationRibbon from "@/assets/images/S__189390854_0.jpg";
+import illustrationFloat from "@/assets/images/S__189390853_0.jpg";
+import illustrationTea from "@/assets/images/S__189390852_0.jpg";
+import illustrationPortrait from "@/assets/images/S__149962756_0.jpg";
+import dogjuice from "@/assets/images/dogjuice.png";
 
 interface SwiperInstance {
-  destroy: (deleteInstance?: boolean, cleanStyles?: boolean) => void
+  destroy: (deleteInstance?: boolean, cleanStyles?: boolean) => void;
 }
 
 interface SwiperConstructor {
-  new (element: HTMLElement, options: Record<string, unknown>): SwiperInstance
+  new (element: HTMLElement, options: Record<string, unknown>): SwiperInstance;
 }
 
 declare global {
   interface Window {
-    Swiper?: SwiperConstructor
+    Swiper?: SwiperConstructor;
   }
 }
 
 const illustrations = [
-  { image: illustrationRibbon, title: 'Ribbon day', category: 'Character study' },
-  { image: illustrationFloat, title: 'Sweet float', category: 'Summer sketch' },
-  { image: illustrationTea, title: 'Tea time', category: 'Small story' },
-  { image: illustrationPortrait, title: 'Soft portrait', category: 'Character study' },
-]
-const carouselIllustrations = [...illustrations, ...illustrations, ...illustrations]
+  {
+    image: illustrationRibbon,
+    title: "Ribbon day",
+    category: "Character study",
+  },
+  { image: illustrationFloat, title: "Sweet float", category: "Summer sketch" },
+  { image: illustrationTea, title: "Tea time", category: "Small story" },
+  {
+    image: illustrationPortrait,
+    title: "Soft portrait",
+    category: "Character study",
+  },
+];
+const carouselIllustrations = [
+  ...illustrations,
+  ...illustrations,
+  ...illustrations,
+];
 
-const carousel = ref<HTMLElement | null>(null)
-let swiper: SwiperInstance | undefined
+const carousel = ref<HTMLElement | null>(null);
+let swiper: SwiperInstance | undefined;
 
 onMounted(async () => {
-  await nextTick()
-  if (!carousel.value || !window.Swiper) return
+  await nextTick();
+  if (!carousel.value || !window.Swiper) return;
 
-  const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches
+  const reduceMotion = window.matchMedia(
+    "(prefers-reduced-motion: reduce)",
+  ).matches;
 
   swiper = new window.Swiper(carousel.value, {
-    slidesPerView: 'auto',
+    slidesPerView: "auto",
     spaceBetween: 0,
     centeredSlides: false,
     loop: true,
@@ -53,34 +67,52 @@ onMounted(async () => {
           disableOnInteraction: false,
           pauseOnMouseEnter: false,
         },
-  })
-})
+  });
+});
 
-onBeforeUnmount(() => swiper?.destroy(true, true))
+onBeforeUnmount(() => swiper?.destroy(true, true));
 </script>
 
 <template>
-  <section id="illustrations" class="illustrations" aria-labelledby="illustrations-title">
+  <section
+    id="illustrations"
+    class="illustrations"
+    aria-labelledby="illustrations-title"
+  >
     <div class="illustrations__intro section-shell" data-reveal>
       <p class="eyebrow">04 / Illustration archive</p>
       <div>
-        <h2 id="illustrations-title" class="display-title">Drawn with<br /><em>feeling.</em></h2>
+        <h2 id="illustrations-title" class="display-title">
+          Drawn with<br /><em>feeling.</em>
+        </h2>
         <p>把日常裡的小小想像，畫成柔軟的角色。</p>
       </div>
     </div>
 
     <div class="illustrations__carousel-actions section-shell" data-reveal>
-      <a class="illustrations__more" href="#illustrations">
+      <RouterLink class="illustrations__more" :to="{ name: 'illustration-works' }">
         <span class="illustrations__more-label">View More</span>
         <span class="illustrations__more-circle" aria-hidden="true">→</span>
-      </a>
+      </RouterLink>
     </div>
 
-    <div ref="carousel" class="illustrations__carousel swiper" aria-label="插畫作品輪播" data-reveal>
+    <div
+      ref="carousel"
+      class="illustrations__carousel swiper"
+      aria-label="插畫作品輪播"
+      data-reveal
+    >
       <div class="swiper-wrapper">
-        <article v-for="(illustration, index) in carouselIllustrations" :key="`${illustration.title}-${index}`" class="illustration-card swiper-slide">
+        <article
+          v-for="(illustration, index) in carouselIllustrations"
+          :key="`${illustration.title}-${index}`"
+          class="illustration-card swiper-slide"
+        >
           <img :src="illustration.image" :alt="illustration.title" />
-          <p class="sr-only">{{ String(index + 1).padStart(2, '0') }} / {{ illustration.category }} — {{ illustration.title }}</p>
+          <p class="sr-only">
+            {{ String(index + 1).padStart(2, "0") }} /
+            {{ illustration.category }} — {{ illustration.title }}
+          </p>
         </article>
       </div>
     </div>
@@ -109,7 +141,7 @@ onBeforeUnmount(() => swiper?.destroy(true, true))
   left: 0;
   height: clamp(7rem, 14vw, 12rem);
   background: linear-gradient(180deg, rgba(249, 249, 249, 0) 0%, #ffffff 100%);
-  content: '';
+  content: "";
   pointer-events: none;
 }
 
@@ -207,7 +239,10 @@ onBeforeUnmount(() => swiper?.destroy(true, true))
   border-radius: 50%;
   font-size: 1.45rem;
   line-height: 1;
-  transition: transform 500ms cubic-bezier(0.22, 1, 0.36, 1), background-color 350ms ease, color 350ms ease;
+  transition:
+    transform 500ms cubic-bezier(0.22, 1, 0.36, 1),
+    background-color 350ms ease,
+    color 350ms ease;
 }
 
 .illustration-card {

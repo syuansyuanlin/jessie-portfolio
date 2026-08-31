@@ -27,7 +27,6 @@ function goTo(target: string) {
       aria-label="回到首頁"
       @click.prevent="goTo('#top')"
     >
-      <span class="brand__mark">JL</span>
       <span class="brand__name">Jessie Lin</span>
     </a>
 
@@ -100,22 +99,9 @@ function goTo(target: string) {
 .brand {
   display: inline-flex;
   align-items: center;
-  gap: 0.7rem;
   font-size: 0.75rem;
   font-weight: 500;
   letter-spacing: 0.06em;
-}
-
-.brand__mark {
-  display: grid;
-  width: 1.85rem;
-  height: 1.85rem;
-  place-items: center;
-  border: 1px solid var(--ink);
-  border-radius: 50%;
-  font-family: var(--font-serif);
-  font-size: 0.78rem;
-  letter-spacing: -0.06em;
 }
 
 .desktop-nav {
