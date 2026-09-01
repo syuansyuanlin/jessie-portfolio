@@ -56,37 +56,41 @@ onMounted(() => {
   })
 
   let isVisible = false
-  let isInsideAbout = false
+  let isInsideBubbleSection = false
   let hoveredTarget: Element | null = null
 
   const updateHoverState = (target: EventTarget | null) => {
-    const nextIsInsideAbout = target instanceof Element && Boolean(target.closest('#about'))
+    const nextIsInsideBubbleSection =
+      target instanceof Element && Boolean(target.closest('#about, #contact'))
     const nextTarget = target instanceof Element
       ? target.closest('.hover-target, a, button')
       : null
 
-    if (nextTarget === hoveredTarget && nextIsInsideAbout === isInsideAbout) return
+    if (
+      nextTarget === hoveredTarget &&
+      nextIsInsideBubbleSection === isInsideBubbleSection
+    ) return
 
-    isInsideAbout = nextIsInsideAbout
+    isInsideBubbleSection = nextIsInsideBubbleSection
     hoveredTarget = nextTarget
     scaleTo(nextTarget ? 4 : 1)
-    opacityTo(isInsideAbout ? 0 : nextTarget ? 0.32 : 1)
-    haloScaleTo(nextTarget ? 1.4 : 0.4)
-    haloOpacityTo(nextTarget ? 0.95 : 0)
+    opacityTo(isInsideBubbleSection ? 0 : nextTarget ? 0.32 : 1)
+    haloScaleTo(isInsideBubbleSection ? 0.4 : nextTarget ? 1.4 : 0.4)
+    haloOpacityTo(isInsideBubbleSection ? 0 : nextTarget ? 0.95 : 0)
   }
 
   const showCursor = () => {
     if (isVisible) return
 
     isVisible = true
-    gsap.set(cursorElement, { autoAlpha: 1 })
+    gsap.set(cursorElement, { visibility: 'visible' })
     gsap.set(haloElement, { visibility: 'visible' })
-    opacityTo(isInsideAbout ? 0 : hoveredTarget ? 0.32 : 1)
+    opacityTo(isInsideBubbleSection ? 0 : hoveredTarget ? 0.32 : 1)
   }
 
   const hideCursor = () => {
     isVisible = false
-    isInsideAbout = false
+    isInsideBubbleSection = false
     hoveredTarget = null
     scaleTo(1)
     opacityTo(0)
@@ -97,7 +101,8 @@ onMounted(() => {
   const handlePointerMove = (event: PointerEvent) => {
     if (event.pointerType !== 'mouse') return
 
-    updateHoverState(event.target)
+    const pointerTarget = document.elementFromPoint(event.clientX, event.clientY)
+    updateHoverState(pointerTarget ?? event.target)
     showCursor()
     xTo(event.clientX)
     yTo(event.clientY)
@@ -203,5 +208,10 @@ onBeforeUnmount(() => cleanup?.())
   box-shadow:
     0 0 0 0.25rem rgba(254, 223, 225, 0.12),
     0 0 0.7rem rgba(254, 223, 225, 0.2) !important;
+}
+
+html.contact-cursor-bubble-active .custom-cursor,
+html.contact-cursor-bubble-active .custom-cursor__halo {
+  opacity: 0 !important;
 }
 </style>

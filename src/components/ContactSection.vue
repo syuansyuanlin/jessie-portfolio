@@ -1,5 +1,100 @@
 <script setup lang="ts">
+import { onBeforeUnmount, onMounted, ref } from 'vue'
+import { gsap } from 'gsap'
 import { Icon } from "@iconify/vue";
+
+const contactSection = ref<HTMLElement | null>(null)
+const cursorBubble = ref<HTMLElement | null>(null)
+let cleanupCursorBubble: (() => void) | undefined
+
+onMounted(() => {
+  const section = contactSection.value
+  const bubble = cursorBubble.value
+  const supportsEffect = window.matchMedia(
+    '(hover: hover) and (pointer: fine) and (prefers-reduced-motion: no-preference)',
+  ).matches
+
+  if (!section || !bubble || !supportsEffect) return
+
+  gsap.set(bubble, { xPercent: -50, yPercent: -50, opacity: 0, scale: 0.72 })
+
+  const xTo = gsap.quickTo(bubble, 'x', { duration: 0.8, ease: 'power3.out' })
+  const yTo = gsap.quickTo(bubble, 'y', { duration: 0.8, ease: 'power3.out' })
+  let isVisible = false
+  let lastPointer: { x: number; y: number } | undefined
+
+  const setVisibility = (shouldShow: boolean) => {
+    if (isVisible === shouldShow) return
+
+    isVisible = shouldShow
+    document.documentElement.classList.toggle(
+      'contact-cursor-bubble-active',
+      shouldShow,
+    )
+    gsap.to(bubble, {
+      opacity: shouldShow ? 1 : 0,
+      duration: shouldShow ? 0.45 : 0.36,
+      ease: 'power2.out',
+      overwrite: 'auto',
+      scale: shouldShow ? 1 : 0.72,
+    })
+  }
+
+  const updateBubble = () => {
+    if (!lastPointer) return
+
+    const bounds = section.getBoundingClientRect()
+    const bubbleRadius = bubble.offsetWidth / 2
+    const verticalSafeInset = bubbleRadius + 12
+    const isInsideContact =
+      lastPointer.x >= bounds.left &&
+      lastPointer.x <= bounds.right &&
+      lastPointer.y >= bounds.top + verticalSafeInset &&
+      lastPointer.y <= bounds.bottom - verticalSafeInset
+
+    if (!isInsideContact) {
+      setVisibility(false)
+      return
+    }
+
+    const x = lastPointer.x - bounds.left
+    const y = lastPointer.y - bounds.top
+
+    if (!isVisible) {
+      gsap.set(bubble, { x, y })
+      setVisibility(true)
+      return
+    }
+
+    xTo(x)
+    yTo(y)
+    setVisibility(true)
+  }
+
+  const handleMouseMove = (event: MouseEvent) => {
+    lastPointer = { x: event.clientX, y: event.clientY }
+    updateBubble()
+  }
+
+  const handleWindowBlur = () => setVisibility(false)
+
+  document.addEventListener('mousemove', handleMouseMove, { passive: true })
+  window.addEventListener('scroll', updateBubble, { passive: true })
+  window.addEventListener('blur', handleWindowBlur)
+
+  cleanupCursorBubble = () => {
+    document.removeEventListener('mousemove', handleMouseMove)
+    window.removeEventListener('scroll', updateBubble)
+    window.removeEventListener('blur', handleWindowBlur)
+    document.documentElement.classList.remove('contact-cursor-bubble-active')
+  }
+})
+
+onBeforeUnmount(() => {
+  cleanupCursorBubble?.()
+  document.documentElement.classList.remove('contact-cursor-bubble-active')
+  if (cursorBubble.value) gsap.killTweensOf(cursorBubble.value)
+})
 
 const contacts = [
   {
@@ -18,7 +113,13 @@ const contacts = [
 </script>
 
 <template>
-  <section id="contact" class="contact" aria-labelledby="contact-title">
+  <section
+    ref="contactSection"
+    id="contact"
+    class="contact"
+    aria-labelledby="contact-title"
+  >
+    <span ref="cursorBubble" class="contact__cursor-bubble" aria-hidden="true" />
     <div class="contact__shell section-shell">
       <p class="eyebrow" data-reveal>06 / Contact</p>
       <h2 id="contact-title" class="contact__title" data-reveal>
@@ -57,12 +158,59 @@ const contacts = [
 
 <style scoped lang="scss">
 .contact {
+  position: relative;
+  isolation: isolate;
   padding: clamp(8rem, 15vw, 14rem) 0 clamp(6rem, 10vw, 9rem);
+  overflow: hidden;
   background: var(--paper);
 }
 
 .contact__shell {
   position: relative;
+  z-index: 1;
+}
+
+.contact__cursor-bubble {
+  position: absolute;
+  z-index: 0;
+  top: 0;
+  left: 0;
+  width: clamp(18rem, 29vw, 28rem);
+  aspect-ratio: 1;
+  border: 1px solid rgba(255, 255, 255, 0.62);
+  border-radius: 60% 70% 57% 68% / 50% 65% 62% 68%;
+  background:
+    radial-gradient(ellipse at 28% 22%, rgba(255, 255, 255, 0.68), transparent 28%),
+    radial-gradient(ellipse at 76% 78%, rgba(254, 223, 225, 0.24), transparent 48%),
+    linear-gradient(
+      135deg,
+      rgba(190, 222, 237, 0.38),
+      rgba(246, 247, 249, 0.44) 48%,
+      rgba(254, 223, 225, 0.3)
+    );
+  backdrop-filter: blur(4px) saturate(108%);
+  -webkit-backdrop-filter: blur(4px) saturate(108%);
+  box-shadow:
+    0 1.1rem 2.4rem rgba(128, 157, 173, 0.1),
+    inset 0 0.08rem 0.1rem rgba(255, 255, 255, 0.56),
+    inset 0 -0.8rem 1.6rem rgba(160, 190, 204, 0.06),
+    inset 0 0 0 1px rgba(255, 255, 255, 0.18);
+  opacity: 0;
+  pointer-events: none;
+  will-change: transform, opacity;
+}
+
+.contact__cursor-bubble::before {
+  position: absolute;
+  top: 8%;
+  left: 10%;
+  width: 48%;
+  height: 10%;
+  border-radius: 50%;
+  background: linear-gradient(90deg, rgba(255, 255, 255, 0.48), rgba(255, 255, 255, 0));
+  content: '';
+  filter: blur(5px);
+  transform: rotate(-15deg);
 }
 
 .contact__title {

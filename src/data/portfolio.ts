@@ -1,6 +1,7 @@
 import type { Experience, Project, SkillGroup } from '@/types/portfolio'
 import portfolioCoverImage from '@/assets/images/xxx.png'
 import luminaCoverImage from '@/assets/images/lumina.png'
+import subManagerCoverImage from '@/assets/images/sub-1.png'
 
 export const navigation = [
   { label: 'About', target: '#about' },
@@ -42,7 +43,7 @@ export const projects: Project[] = [
     description: '以「日系雜誌風格」為靈感，透過留白、圓形構圖與柔和色彩，營造輕盈、靜謐的氛圍。 在簡單中感受到細節，在距離中感受到溫度。',
     image: portfolioCoverImage,
     imageAlt: 'Jessie 個人作品集首頁設計',
-    technologies: ['Vue3', 'SCSS'],
+    technologies: ['Vue3', 'TypeScript', 'Vite', 'SCSS', 'GSAP'],
     demoUrl: '/works/portfolio-website-design',
   },
   {
@@ -57,15 +58,16 @@ export const projects: Project[] = [
     demoUrl: '/works/lumina-website-design',
   },
   {
-    id: 'kanso-shop',
+    id: 'submanager',
     number: '03',
-    title: 'Kanso Objects',
-    category: 'E-commerce · 2023',
-    description: '為日常器物設計一處安靜的展示空間，讓商品自己說話。',
-    image: 'https://images.unsplash.com/photo-1524758631624-e2822e304c36?auto=format&fit=crop&w=1800&q=90',
-    imageAlt: '明亮的設計工作室',
-    technologies: ['Vue 3', 'SCSS', 'Shopify'],
-    demoUrl: 'https://example.com',
+    title: 'SubManager Objects',
+    category: 'E-commerce · 2026',
+    description: '與codex協作開發全端訂閱管理平台，使用 Vue3、TypeScript、Express、Prisma 與 PostgreSQL，實作 JWT 驗證、多幣別支出分析、付款紀錄及自動提醒排程。',
+    image: subManagerCoverImage,
+    imageAlt: 'SubManager 專案封面',
+    imageFit: 'contain',
+    technologies: ['Vue 3', 'SCSS', 'Node.js', 'PostgreSQL'],
+    demoUrl: '/works/submanager',
   },
 ]
 

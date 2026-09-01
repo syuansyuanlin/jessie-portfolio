@@ -14,6 +14,7 @@ export interface Project {
   description: string
   image: string
   imageAlt: string
+  imageFit?: 'cover' | 'contain'
   technologies: string[]
   demoUrl: string
 }

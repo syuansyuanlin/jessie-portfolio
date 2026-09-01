@@ -79,12 +79,9 @@ const portraitIllustrations = [
         data-reveal
       >
         <figure
-          v-for="(work, index) in portraitIllustrations"
+          v-for="work in portraitIllustrations"
           :key="work.alt"
           class="illustration-work-detail__artwork"
-          :class="{
-            'illustration-work-detail__artwork--featured': index === 0,
-          }"
         >
           <img :src="work.image" :alt="work.alt" />
         </figure>
@@ -227,15 +224,13 @@ const portraitIllustrations = [
   background: #f6f7f9;
 }
 
-.illustration-work-detail__artwork--featured {
-  grid-column: span 2;
-}
-
-.illustration-work-detail__gallery--ip .illustration-work-detail__artwork {
+.illustration-work-detail__gallery--ip .illustration-work-detail__artwork,
+.illustration-work-detail__gallery--portrait .illustration-work-detail__artwork {
   aspect-ratio: 1;
 }
 
-.illustration-work-detail__gallery--ip .illustration-work-detail__artwork img {
+.illustration-work-detail__gallery--ip .illustration-work-detail__artwork img,
+.illustration-work-detail__gallery--portrait .illustration-work-detail__artwork img {
   height: 100%;
   object-fit: cover;
 }
@@ -320,8 +315,5 @@ const portraitIllustrations = [
     grid-template-columns: 1fr;
   }
 
-  .illustration-work-detail__artwork--featured {
-    grid-column: auto;
-  }
 }
 </style>

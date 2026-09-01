@@ -9,7 +9,7 @@ import coverImage from '@/assets/images/DM.png'
 
       <div class="graphic-work-detail__heading" data-reveal>
         <h1>Graphic design</h1>
-        <p>平面設計作品集</p>
+        <p>平面設計作品</p>
       </div>
 
       <figure class="graphic-work-detail__cover" data-reveal>

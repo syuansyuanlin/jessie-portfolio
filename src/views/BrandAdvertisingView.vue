@@ -33,7 +33,7 @@ const works = [
 
       <div class="brand-advertising__heading">
         <h1>Brand advertising<br /><em>graphics.</em></h1>
-        <p>品牌廣告圖作品集</p>
+        <p>品牌廣告圖作品</p>
       </div>
     </section>
 

@@ -183,7 +183,7 @@ import { skills } from '@/data/portfolio'
 }
 
 .skill-group--1 .skill-group__float {
-  animation: skills-card-drift 8s ease-in-out infinite alternate;
+  animation: skills-card-drift-one 7s ease-in-out infinite alternate;
 }
 
 .skill-group--1 .skill-group__float::before {
@@ -191,7 +191,7 @@ import { skills } from '@/data/portfolio'
 }
 
 .skill-group--2 .skill-group__float {
-  animation: skills-card-drift 10s ease-in-out -2.5s infinite alternate-reverse;
+  animation: skills-card-drift-two 8s ease-in-out -2.5s infinite alternate;
 }
 
 .skill-group--2 .skill-group__float::before {
@@ -199,19 +199,37 @@ import { skills } from '@/data/portfolio'
 }
 
 .skill-group--3 .skill-group__float {
-  animation: skills-card-drift 9s ease-in-out -4s infinite alternate;
+  animation: skills-card-drift-three 7.5s ease-in-out -4s infinite alternate;
 }
 
 .skill-group--3 .skill-group__float::before {
   border-radius: 49% 51% 45% 55% / 55% 47% 53% 45%;
 }
 
-@keyframes skills-card-drift {
+@keyframes skills-card-drift-one {
   from {
-    transform: translate3d(-0.5rem, 0, 0);
+    transform: translate3d(-0.8rem, -0.45rem, 0) rotate(-0.35deg);
   }
   to {
-    transform: translate3d(0.5rem, 0, 0);
+    transform: translate3d(0.85rem, 0.55rem, 0) rotate(0.35deg);
+  }
+}
+
+@keyframes skills-card-drift-two {
+  from {
+    transform: translate3d(0.75rem, -0.55rem, 0) rotate(0.3deg);
+  }
+  to {
+    transform: translate3d(-0.85rem, 0.45rem, 0) rotate(-0.3deg);
+  }
+}
+
+@keyframes skills-card-drift-three {
+  from {
+    transform: translate3d(-0.65rem, 0.55rem, 0) rotate(-0.25deg);
+  }
+  to {
+    transform: translate3d(0.8rem, -0.5rem, 0) rotate(0.3deg);
   }
 }
 

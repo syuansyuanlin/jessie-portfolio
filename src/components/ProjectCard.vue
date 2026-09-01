@@ -15,7 +15,13 @@ defineProps<{
     :class="{ 'project-card--reversed': reversed }"
   >
     <div class="project-card__image-wrap">
-      <img class="project-card__image" :src="project.image" :alt="project.imageAlt" loading="lazy" />
+      <img
+        class="project-card__image"
+        :class="{ 'project-card__image--contain': project.imageFit === 'contain' }"
+        :src="project.image"
+        :alt="project.imageAlt"
+        loading="lazy"
+      />
       <p class="project-card__number">{{ project.number }}</p>
     </div>
 
@@ -77,6 +83,10 @@ defineProps<{
   object-fit: cover;
   filter: saturate(0.72) sepia(0.08);
   transition: transform 1.1s cubic-bezier(0.22, 1, 0.36, 1), filter 800ms ease;
+}
+
+.project-card__image--contain {
+  object-fit: contain;
 }
 
 .project-card__number {
@@ -180,6 +190,10 @@ defineProps<{
   .project-card__image {
     filter: saturate(0.84) sepia(0.03);
     transform: scale(1.025);
+  }
+
+  .project-card__image--contain {
+    transform: none;
   }
 }
 

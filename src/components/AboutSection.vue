@@ -113,7 +113,7 @@ onBeforeUnmount(() => {
           嗨！我是一名具備 UI 設計、前端開發與企業應用系統開發經驗的工程師。
         </p>
         <p>
-          透過自學與實務專案累積設計與開發能力，致力於將設計理念轉化為實際可使用的產品與系統。
+          透過實務專案累積設計與開發能力，致力於將設計理念轉化為實際可使用的產品與系統。
         </p>
         <RouterLink class="about__more" to="/about">
           <span class="about__more-label">View More</span>
