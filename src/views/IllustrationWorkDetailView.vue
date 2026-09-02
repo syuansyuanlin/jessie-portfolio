@@ -9,6 +9,8 @@ import ipRibbon from "@/assets/images/S__189390854_0.jpg";
 import portraitRibbon from "@/assets/images/S__149962756_0.jpg";
 import portraitTulips from "@/assets/images/S__149962758_0.jpg";
 import portraitBeret from "@/assets/images/S__149962759_0.jpg";
+import portraitPuppy from "@/assets/images/S__193036295_0.jpg";
+import portraitLove from "@/assets/images/S__193036296_0.jpg";
 import portraitAngel from "@/assets/images/S__193036301_0.jpg";
 
 const ipDesignWorks = [
@@ -25,6 +27,8 @@ const portraitIllustrations = [
   { image: portraitRibbon, alt: "蝴蝶結少女人物插畫" },
   { image: portraitTulips, alt: "鬱金香少女人物插畫" },
   { image: portraitBeret, alt: "貝雷帽少女人物插畫" },
+  { image: portraitPuppy, alt: "少女與白色小狗人物插畫" },
+  { image: portraitLove, alt: "粉色愛心手勢少女人物插畫" },
   { image: portraitAngel, alt: "天使造型人物插畫" },
 ];
 </script>
