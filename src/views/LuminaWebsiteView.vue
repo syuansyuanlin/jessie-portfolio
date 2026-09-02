@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import luminaPageOne from '@/assets/images/lumina-1.png'
-import luminaPageTwo from '@/assets/images/lumina-2.png'
+import luminaPageOne from '@/assets/images/lumina-1.webp'
+import luminaPageTwo from '@/assets/images/lumina-2.webp'
 
 const pages = [
   {

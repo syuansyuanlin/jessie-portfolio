@@ -1,26 +1,14 @@
 <script setup lang="ts">
-const imageModules = import.meta.glob(
-  '../**/*.{png,jpg,jpeg,webp,avif,PNG,JPG,JPEG,WEBP,AVIF}',
-  { eager: true, import: 'default' },
-) as Record<string, string>
-
-const imageFor = (name: string) => {
-  const entry = Object.entries(imageModules).find(([path]) => {
-    const segments = path.split('/')
-    const fileName = segments[segments.length - 1]?.replace(/\.[^.]+$/, '') ?? ''
-    return fileName.toLowerCase() === name.toLowerCase()
-  })
-
-  return entry?.[1] ?? ''
-}
+import brandAdOne from '@/assets/images/1-21.png'
+import brandAdTwo from '@/assets/images/1-22.png'
 
 const works = [
   {
-    image: imageFor('1-21'),
+    image: brandAdOne,
     alt: '品牌廣告圖作品一',
   },
   {
-    image: imageFor('1-22'),
+    image: brandAdTwo,
     alt: '品牌廣告圖作品二',
   },
 ]
