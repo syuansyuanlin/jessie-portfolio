@@ -60,9 +60,9 @@ export const projects: Project[] = [
   {
     id: 'submanager',
     number: '03',
-    title: 'SubManager Objects',
+    title: 'SubManager Side Project',
     category: 'E-commerce · 2026',
-    description: '與codex協作開發全端訂閱管理平台，使用 Vue3、TypeScript、Express、Prisma 與 PostgreSQL，實作 JWT 驗證、多幣別支出分析、付款紀錄及自動提醒排程。',
+    description: '開發全端訂閱管理平台，使用 Vue3、TypeScript、Express、Prisma 與 PostgreSQL，實作 JWT 驗證、多幣別支出分析、付款紀錄及自動提醒排程。',
     image: subManagerCoverImage,
     imageAlt: 'SubManager 專案封面',
     imageFit: 'contain',
